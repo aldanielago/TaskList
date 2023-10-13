@@ -1,20 +1,36 @@
 import "./index.css";
 import { useState } from 'react';
-import { TodoItem } from "./components/TodoItem"
-import { ItemProject } from "./components/ItemProject";
+import { TodoItem } from "./components/items/TodoItem"
+import { ProjectItem } from "./components/items/ProjectItem";
 import { ButtonNewTask } from "./components/buttons/ButtonNewTask";
 import { ButtonViewAllProjects } from "./components/buttons/ButtonViewAllProjects";
 
-const tasks_array = [
-  { text: 'Hacer el ensayo', tasks: 23, completed: true},
-  { text: 'Estudiar biología', tasks: 3, completed: false},
-  { text: 'Codificar la interfaz', tasks: 12, completed: true},
+const tasksDefault = [
+  { text: 'Hacer el ensayo', nameProject:'Pensum', completed: true},
+  { text: 'Estudiar biología', nameProject:'VacationalRental', completed: false},
+  { text: 'Codificar la interfaz', nameProject:'MovieAPI', completed: true},
+]
+
+const projectsDefault = [
+  { name: 'Pensum', tasks: 10, team: 'bg-light-blue', colorProgressBar: 'bg-very-light-blue'},
+  { name: 'VacationRental', tasks: 3, team: 'bg-light-yellow', colorProgressBar: 'bg-very-light-yellow'},
+  { name: 'MovieAPI', tasks: 9, team: 'bg-light-pink', colorProgressBar: 'bg-very-light-pink'}
 ]
 
 function App() {
-  let [ tasks, setTaks ] = useState(tasks_array);
-  const completedTasks = tasks.filter( task => !!task.completed).length;
-  const totalTasks = tasks.length;
+  let [ projects, setProjects ] = useState(projectsDefault);
+  let [ tasks, setTaks ] = useState(tasksDefault);
+  let completedTasks = tasks.filter( task => !!task.completed).length;
+  let totalTasks = tasks.length;
+
+  const completeTask = (text) => {
+    const newTasks = [...tasks];
+    const indexTask = newTasks.findIndex(
+      (task) => task.text = text
+    );
+    newTasks[indexTask].completed = true;
+    setTaks(newTasks);
+  }
 
   return (
     <section className="pt-4">
@@ -23,15 +39,20 @@ function App() {
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
       <div className="pl-4 w-full flex flex-col items-center">
         { tasks.map((task) => (
-          <TodoItem key={task.id} text={task.text} tasks={task.tasks} setTaks={setTaks}/>
+          <TodoItem key={task.text} text={task.text} nameProject={task.nameProject}
+            completed={task.completed} onComplete={() => {
+            completeTask(task.text)
+          }}/>
         ))}
         <ButtonNewTask/>
       </div>
       <h3 className="pt-4 pl-4 font-Quicksand">Your projects</h3>
       <div className="pl-4 w-full flex flex-col items-center">
-        <ItemProject/>
-        <ItemProject/>
-        <ItemProject/>
+        { projects.map((project) => (
+          <ProjectItem key={project.id} name={project.name} tasks={project.tasks}
+          team={project.team} colorProgressBar={project.colorProgressBar}
+          setProjects={setProjects}/>
+        ))}
         <ButtonViewAllProjects/>
       </div>
     </section>
