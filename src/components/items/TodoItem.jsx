@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
-function TodoItem({ text, nameProject, completed, onComplete }) {
+function TodoItem({ text, nameProject, completed, onComplete, onDelete }) {
   const [ srcImage, setSrcImage ] = useState('/circle.svg');
   const [ textDecoration, setTextDecoration ] = useState('no-underline');
 
   const handleButtonClick = () => {
-    !completed ? setSrcImage('/check-circle.svg') : setSrcImage('/circle.svg');
-    !completed ? setTextDecoration('line-through') : setTextDecoration('no-underline');
-    if(completed){ onComplete()}
+    if(!completed){
+      setSrcImage('/check-circle.svg');
+      setTextDecoration('line-through');
+    } else {
+      setSrcImage('/circle.svg');
+      setTextDecoration('no-underline');
+    }
+    onComplete();
   }
 
   return (
@@ -22,7 +27,7 @@ function TodoItem({ text, nameProject, completed, onComplete }) {
         </div>
       </div>
       <button className="bg-unset cursor-pointer w-6 h-6 transition-transform transform hover:scale-110">
-        <img src='/x-circle.svg' className="hover:filter hover:saturate-200"/>
+        <img onClick={onDelete} src='/x-circle.svg' className="hover:filter hover:saturate-200"/>
       </button>
     </div>
   );
