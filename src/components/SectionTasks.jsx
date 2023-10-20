@@ -1,27 +1,12 @@
-import { useState } from 'react';
 import { TodoItem } from "../components/items/TodoItem";
 import { ButtonNewTask } from "../components/buttons/ButtonNewTask";
+import { useLocalStorage } from "../hooks/useLocalStorage"
 
 function SectionTasks(){
-  const localStorageTasks = localStorage.getItem('TASKS_V1');
-  let parsedLocalStorage;
-  if(!localStorageTasks){
-    parsedLocalStorage = []
-    localStorage.setItem('TASKS_V1', JSON.stringify(parsedLocalStorage));
-  } else {
-    parsedLocalStorage = JSON.parse(localStorageTasks);
-  }
-
-  const [ tasks, setTasks ] = useState(parsedLocalStorage);
+  const [ tasks, setTasks ] = useLocalStorage('TASKS_V1', []);
   let completedTasks = tasks.filter( task => !!task.completed).length;
   let totalTasks = tasks.length;
   let message;
-
-  // This function update the state and local storage at the same time
-  const updateInfo = (new_info) => {
-    setTasks(new_info);
-    localStorage.setItem('TASKS_V1', JSON.stringify(new_info));
-  }
 
   // This function complete and delete a task and update the state and localstorage at the end.
   const updateTasks = (text, action) => {
@@ -34,7 +19,7 @@ function SectionTasks(){
       ? newTasks[indexTask].completed == true ? newTasks[indexTask].completed = false : newTasks[indexTask].completed = true
       : newTasks.splice(indexTask, 1);
 
-      updateInfo(newTasks);
+      setTasks(newTasks);
   };
 
   // This part changes the firt phrase in case the user have done everything or not.
