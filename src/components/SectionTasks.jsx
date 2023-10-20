@@ -2,18 +2,28 @@ import { useState } from 'react';
 import { TodoItem } from "../components/items/TodoItem";
 import { ButtonNewTask } from "../components/buttons/ButtonNewTask";
 
-const tasksDefault = [
-  { text: 'Hacer el ensayo', nameProject:'Pensum', completed: false},
-  { text: 'Estudiar biología', nameProject:'VacationalRental', completed: false},
-  { text: 'Codificar la interfaz', nameProject:'MovieAPI', completed: false},
-];
-
 function SectionTasks(){
-  const [ tasks, setTasks ] = useState(tasksDefault);
+  const localStorageTasks = localStorage.getItem('TASKS_V1');
+  let parsedLocalStorage;
+  if(!localStorageTasks){
+    parsedLocalStorage = []
+    localStorage.setItem('TASKS_V1', JSON.stringify(parsedLocalStorage));
+  } else {
+    parsedLocalStorage = JSON.parse(localStorageTasks);
+  }
+
+  const [ tasks, setTasks ] = useState(parsedLocalStorage);
   let completedTasks = tasks.filter( task => !!task.completed).length;
   let totalTasks = tasks.length;
   let message;
 
+  // This function update the state and local storage at the same time
+  const updateInfo = (new_info) => {
+    setTasks(new_info);
+    localStorage.setItem('TASKS_V1', JSON.stringify(new_info));
+  }
+
+  // This function complete and delete a task and update the state and localstorage at the end.
   const updateTasks = (text, action) => {
     const newTasks = [...tasks];
     const indexTask = newTasks.findIndex(
@@ -24,9 +34,10 @@ function SectionTasks(){
       ? newTasks[indexTask].completed == true ? newTasks[indexTask].completed = false : newTasks[indexTask].completed = true
       : newTasks.splice(indexTask, 1);
 
-    setTasks(newTasks);
+      updateInfo(newTasks);
   };
 
+  // This part changes the firt phrase in case the user have done everything or not.
   if(completedTasks == totalTasks){
     message = (
       <p className="text-xs pl-4 font-Quicksand text-gray-font">
