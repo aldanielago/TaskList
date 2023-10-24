@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function useLocalStorage(itemName, initialSatate){
-  const localStorageItems = localStorage.getItem(itemName);
-  let parsedLocalStorage;
+function useLocalStorage(itemName, initialState){
+  const [ item, setItem ] = useState(initialState);
+  const [ loading, setLoading ] = useState(true);
+  const [ error, setError ] = useState(false);
 
-  if(!localStorageItems){
-    localStorage.setItem(itemName, JSON.stringify(initialSatate));
-    parsedLocalStorage = initialSatate
-  } else {
-    parsedLocalStorage = JSON.parse(localStorageItems);
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        const localStorageItems = localStorage.getItem(itemName);
+        let parsedLocalStorage;
 
-  const [ item, setItem ] = useState(parsedLocalStorage);
+        if(!localStorageItems){
+          localStorage.setItem(itemName, JSON.stringify(initialState));
+          parsedLocalStorage = initialState
+        } else {
+          parsedLocalStorage = JSON.parse(localStorageItems);
+          setItem(parsedLocalStorage);
+        }
+        setLoading(false);
+      } catch (error) {
+        setError(true)
+        setLoading(false);
+      }
+    }, 3000);
+  })
+
 
   // This function update the state and local storage at the same time
   const updateInfo = (new_info) => {
@@ -19,7 +33,12 @@ function useLocalStorage(itemName, initialSatate){
     localStorage.setItem(itemName, JSON.stringify(new_info));
   }
 
-  return [ item, updateInfo ];
+  return {
+    item,
+    updateInfo,
+    loading,
+    error
+  };
 }
 
 export { useLocalStorage }

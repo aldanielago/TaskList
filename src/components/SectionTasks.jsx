@@ -3,7 +3,12 @@ import { ButtonNewTask } from "../components/buttons/ButtonNewTask";
 import { useLocalStorage } from "../hooks/useLocalStorage"
 
 function SectionTasks(){
-  const [ tasks, setTasks ] = useLocalStorage('TASKS_V1', []);
+  const {
+    item: tasks,
+    updateInfo: setTasks,
+    loading,
+    error
+  } = useLocalStorage('TASKS_V1', []);
   let completedTasks = tasks.filter( task => !!task.completed).length;
   let totalTasks = tasks.length;
   let message;
@@ -43,6 +48,8 @@ function SectionTasks(){
       { message }
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
       <div className="pl-4 w-full flex flex-col items-center">
+        { loading && <p>Cargando...</p> }
+        { error && <p>Tenemos un error!</p>}
         { tasks.map((task) => (
           <TodoItem key={task.text} text={task.text} nameProject={task.nameProject} completed={task.completed}
             onComplete={() => { updateTasks(task.text, 'complete') }}
@@ -56,3 +63,16 @@ function SectionTasks(){
 }
 
 export { SectionTasks }
+
+// const todos = [
+//   { text: 'Lo que sea 1', completed: false},
+//   { text: 'Lo que sea 2', completed: false},
+//   { text: 'Lo que sea 3', completed: false},
+//   { text: 'Lo que sea 4', completed: false},
+//   { text: 'Lo que sea 5', completed: false},
+//   { text: 'Lo que sea 6', completed: false},
+//   { text: 'Lo que sea 7', completed: false},
+//   { text: 'Lo que sea 8', completed: false},
+// ]
+
+// localStorage.setItem('TASKS_V1', JSON.stringify(todos));

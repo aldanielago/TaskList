@@ -1,9 +1,8 @@
 import "./index.css";
-import { useState } from 'react';
 import { ProjectItem } from "./components/items/ProjectItem";
 import { ButtonViewAllProjects } from "./components/buttons/ButtonViewAllProjects";
 import { SectionTasks } from "./components/sectionTasks";
-
+import { useState } from "react";
 
 const projectsDefault = [
   { name: 'Pensum', tasks: 10, team: 'bg-light-blue', colorProgressBar: 'bg-very-light-blue'},
