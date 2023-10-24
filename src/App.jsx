@@ -1,7 +1,7 @@
 import "./index.css";
 import { ProjectItem } from "./components/items/ProjectItem";
-import { ButtonViewAllProjects } from "./components/buttons/ButtonViewAllProjects";
 import { SectionTasks } from "./components/sectionTasks";
+import { PrimaryButton } from "./components/buttons/PrimaryButton";
 import { useState } from "react";
 
 const projectsDefault = [
@@ -24,7 +24,7 @@ function App() {
           team={project.team} colorProgressBar={project.colorProgressBar}
           setProjects={setProjects}/>
         ))}
-        <ButtonViewAllProjects/>
+        <PrimaryButton text="View all projects"/>
       </div>
     </section>
   )

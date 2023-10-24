@@ -1,6 +1,8 @@
 import { TodoItem } from "../components/items/TodoItem";
-import { ButtonNewTask } from "../components/buttons/ButtonNewTask";
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import { LoadingTasks } from "./states/LoadingItems";
+import { ErrorLoading } from "./states/ErrorLoading";
+import { PrimaryButton } from "./buttons/PrimaryButton";
 
 function SectionTasks(){
   const {
@@ -48,15 +50,21 @@ function SectionTasks(){
       { message }
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
       <div className="pl-4 w-full flex flex-col items-center">
-        { loading && <p>Cargando...</p> }
-        { error && <p>Tenemos un error!</p>}
+        { loading && (
+          <>
+            <LoadingTasks/>
+            <LoadingTasks/>
+            <LoadingTasks/>
+          </>
+        )}
+        { error && <ErrorLoading/>}
         { tasks.map((task) => (
           <TodoItem key={task.text} text={task.text} nameProject={task.nameProject} completed={task.completed}
             onComplete={() => { updateTasks(task.text, 'complete') }}
             onDelete={() => { updateTasks(task.text, 'delete') }}
           />
         ))}
-        <ButtonNewTask/>
+        <PrimaryButton text="Add new task"/>
       </div>
     </section>
   )
