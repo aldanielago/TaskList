@@ -42,3 +42,16 @@ function useLocalStorage(itemName, initialState){
 }
 
 export { useLocalStorage }
+
+// const todos = [
+//   { text: 'Lo que sea 1', completed: false},
+//   { text: 'Lo que sea 2', completed: false},
+//   { text: 'Lo que sea 3', completed: false},
+//   { text: 'Lo que sea 4', completed: false},
+//   { text: 'Lo que sea 5', completed: false},
+//   { text: 'Lo que sea 6', completed: false},
+//   { text: 'Lo que sea 7', completed: false},
+//   { text: 'Lo que sea 8', completed: false},
+// ]
+
+// localStorage.setItem('TASKS_V1', JSON.stringify(todos));

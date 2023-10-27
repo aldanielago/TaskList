@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", './public/index.html'],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", './index.html'],
   theme: {
     extend: {
       colors: {
@@ -30,6 +30,11 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require('@tailwindcss/forms')({
+      strategy: 'global', // only generate global styles
+    })
+  ],
 }
 

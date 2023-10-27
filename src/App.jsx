@@ -1,6 +1,6 @@
 import "./index.css";
-import { ProjectItem } from "./components/items/ProjectItem";
-import { SectionTasks } from "./components/sectionTasks";
+import { ProjectItem } from "./components/elements/ProjectItem";
+import { SectionTasks } from "./components/SectionTasks";
 import { PrimaryButton } from "./components/buttons/PrimaryButton";
 import { useState } from "react";
 

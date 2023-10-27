@@ -1,8 +1,10 @@
-import { TodoItem } from "../components/items/TodoItem";
+import { TodoItem } from "./elements/TodoItem";
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { LoadingTasks } from "./states/LoadingItems";
 import { ErrorLoading } from "./states/ErrorLoading";
 import { PrimaryButton } from "./buttons/PrimaryButton";
+import { AddTaskModal } from "./elements/AddTaskModal"
+import { useState } from "react";
 
 function SectionTasks(){
   const {
@@ -11,9 +13,10 @@ function SectionTasks(){
     loading,
     error
   } = useLocalStorage('TASKS_V1', []);
-  let completedTasks = tasks.filter( task => !!task.completed).length;
-  let totalTasks = tasks.length;
-  let message;
+  const [ openModal, setOpenModal ] = useState(true);
+  const completedTasks = tasks.filter( task => !!task.completed).length;
+  const totalTasks = tasks.length;
+  let message = 'You have work today';
 
   // This function complete and delete a task and update the state and localstorage at the end.
   const updateTasks = (text, action) => {
@@ -28,6 +31,10 @@ function SectionTasks(){
 
       setTasks(newTasks);
   };
+
+  const handleOpenModal = () => {
+    setOpenModal(openModal ? false : true)
+  }
 
   // This part changes the firt phrase in case the user have done everything or not.
   if(completedTasks == totalTasks){
@@ -64,23 +71,12 @@ function SectionTasks(){
             onDelete={() => { updateTasks(task.text, 'delete') }}
           />
         ))}
-        <PrimaryButton text="Add new task"/>
+      <PrimaryButton text="Add new task" onClick={handleOpenModal}/>
       </div>
+
+      { openModal && <AddTaskModal/>}
     </section>
   )
 }
 
 export { SectionTasks }
-
-// const todos = [
-//   { text: 'Lo que sea 1', completed: false},
-//   { text: 'Lo que sea 2', completed: false},
-//   { text: 'Lo que sea 3', completed: false},
-//   { text: 'Lo que sea 4', completed: false},
-//   { text: 'Lo que sea 5', completed: false},
-//   { text: 'Lo que sea 6', completed: false},
-//   { text: 'Lo que sea 7', completed: false},
-//   { text: 'Lo que sea 8', completed: false},
-// ]
-
-// localStorage.setItem('TASKS_V1', JSON.stringify(todos));
