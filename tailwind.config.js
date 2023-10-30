@@ -33,7 +33,7 @@ export default {
   plugins: [
     // eslint-disable-next-line no-undef
     require('@tailwindcss/forms')({
-      strategy: 'global', // only generate global styles
+      strategy: 'class', // only generate global styles
     })
   ],
 }

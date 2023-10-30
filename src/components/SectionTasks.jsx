@@ -3,7 +3,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage"
 import { LoadingTasks } from "./states/LoadingItems";
 import { ErrorLoading } from "./states/ErrorLoading";
 import { PrimaryButton } from "./buttons/PrimaryButton";
-import { AddTaskModal } from "./elements/AddTaskModal"
+import { AddTask } from "./elements/AddTask";
 import { useState } from "react";
 
 function SectionTasks(){
@@ -57,6 +57,7 @@ function SectionTasks(){
       { message }
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
       <div className="pl-4 w-full flex flex-col items-center">
+        <AddTask/>
         { loading && (
           <>
             <LoadingTasks/>
@@ -73,8 +74,6 @@ function SectionTasks(){
         ))}
       <PrimaryButton text="Add new task" onClick={handleOpenModal}/>
       </div>
-
-      { openModal && <AddTaskModal/>}
     </section>
   )
 }
