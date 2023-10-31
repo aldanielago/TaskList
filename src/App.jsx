@@ -1,8 +1,9 @@
 import "./index.css";
-import { ProjectItem } from "./components/elements/ProjectItem";
-import { SectionTasks } from "./components/SectionTasks";
-import { PrimaryButton } from "./components/buttons/PrimaryButton";
 import { useState } from "react";
+import { SectionTasks } from "./components/SectionTasks";
+import { ProjectItem } from "./components/elements/ProjectItem";
+import { PrimaryButton } from "./components/buttons/PrimaryButton";
+import { TaskProvider } from "./contexts/TaskContext";
 
 const projectsDefault = [
   { name: 'Pensum', tasks: 10, team: 'bg-light-blue', colorProgressBar: 'bg-very-light-blue'},
@@ -16,7 +17,9 @@ function App() {
   return (
     <section className="pt-4">
       <h1 className="font-Quicksand font-bold text-lg pl-4">Hello user.name</h1>
-      <SectionTasks/>
+      <TaskProvider>
+        <SectionTasks/>
+      </TaskProvider>
       <h3 className="pt-4 pl-4 font-Quicksand">Your projects</h3>
       <div className="pl-4 w-full flex flex-col items-center">
         { projects.map((project) => (

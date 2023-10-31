@@ -3,7 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-select option:not(:first-child):hover {
-  background-color: #D7DDFD;
-}
