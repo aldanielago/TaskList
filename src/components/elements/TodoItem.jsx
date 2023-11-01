@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BsCheckCircle, BsXCircle } from 'react-icons/bs';
 
-function TodoItem({ text, nameProject, onComplete, onDelete}) {
+function TodoItem({ task, onComplete, onDelete}) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [textDecoration, setTextDecoration] = useState('no-underline');
 
@@ -20,13 +20,13 @@ function TodoItem({ text, nameProject, onComplete, onDelete}) {
     <div className="bg-secondary-light max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
       <div className='flex gap-4'>
         <button className="bg-unset cursor-pointer" onClick={handleButtonClick}>
-          {isCompleted ? <BsCheckCircle size={30} className='text-green-600'/> : <BsCheckCircle size={30} className="text-zinc-400 hover:text-green-600 transition-colors duration-300 ease-linear"/>}
+          {task.completed ? <BsCheckCircle size={30} className='text-green-600'/> : <BsCheckCircle size={30} className="text-zinc-400 hover:text-green-600 transition-colors duration-300 ease-linear"/>}
         </button>
         <div className="flex flex-col">
           <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`}>
-            {text}
+            {task.text}
           </span>
-          <span className="font-Quicksand text-xs">{nameProject}</span>
+          <span className="font-Quicksand text-xs">{task.nameProject}</span>
         </div>
       </div>
       <button>
