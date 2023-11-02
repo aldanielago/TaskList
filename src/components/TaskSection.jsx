@@ -5,14 +5,17 @@ import { LoadingTasks } from "./states/LoadingItems";
 import { ErrorLoading } from "./states/ErrorLoading";
 import { TaskContext } from "../contexts/TaskContext";
 
-function SectionTasks(){
+function TaskSection(){
   const { loading, error, tasks, generateMessage, deleteTask, completeTask } = useContext(TaskContext);
 
   return (
-    <section>
+    <>
       { generateMessage() }
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
-      <div className="pl-4 w-full flex flex-col items-center">
+      <section>
+        
+      </section>
+      <section className="pl-4 w-full flex flex-col items-center">
         <AddTask/>
         { loading && ( <> <LoadingTasks/> <LoadingTasks/> <LoadingTasks/> </> )}
         { error && <ErrorLoading/>}
@@ -24,9 +27,9 @@ function SectionTasks(){
             onDelete={() => { deleteTask(task.id) }}
           />
         ))}
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 
-export { SectionTasks }
+export { TaskSection }

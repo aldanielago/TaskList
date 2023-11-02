@@ -8,10 +8,10 @@ function TaskProvider({ children }) {
 
   // Function to add a task at the end.
   let nextIdTask = tasks.length;
-  function addTask(text, project) {
+  function addTask(text, date) {
     setTasks([
       ...tasks,
-      { id: nextIdTask, text: text, completed: false, project: project}
+      { id: nextIdTask, text: text, date: date, completed: false}
     ])
   }
 
@@ -49,7 +49,7 @@ function TaskProvider({ children }) {
       return (
         <p className="pl-4 text-xs font-Quicksand text-gray-font">You have finished
           <span className="font-bold ml-1">{completedTasks}</span> of
-          <span className="font-bold ml-1">{tasks.length}</span> taks.
+          <span className="font-bold ml-1">{tasks.length}</span> tasks.
         </p>
       )
     }
