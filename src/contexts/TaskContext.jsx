@@ -6,13 +6,21 @@ const TaskContext = createContext();
 function TaskProvider({ children }) {
   const { item: tasks, updateInfo: setTasks, loading, error } = useLocalStorage('TASKS_V1', []);
 
+  // Function to generate ids
+  function generateUniqueId() {
+    return Date.now(); // It uses the timestamp as id
+  }
+
   // Function to add a task at the end.
-  let nextIdTask = tasks.length;
   function addTask(text, date) {
-    setTasks([
-      ...tasks,
-      { id: nextIdTask, text: text, date: date, completed: false}
-    ])
+    const newTask = {
+      id: generateUniqueId(),
+      text: text,
+      date: date,
+      completed: false
+    };
+
+    setTasks([...tasks, newTask]);
   }
 
   // Function to set the completed state

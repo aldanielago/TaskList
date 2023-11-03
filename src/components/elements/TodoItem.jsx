@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BsCheckCircle, BsXCircle } from 'react-icons/bs';
+import { FormatDate } from '../../utils/FormatDate';
 
 function TodoItem({ task, onComplete, onDelete}) {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -26,7 +27,7 @@ function TodoItem({ task, onComplete, onDelete}) {
           <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`}>
             {task.text}
           </span>
-          <span className="font-Quicksand text-xs">{task.date}</span>
+          <FormatDate date={task.date}/>
         </div>
       </div>
       <button>

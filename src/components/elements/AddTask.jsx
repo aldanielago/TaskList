@@ -26,8 +26,11 @@ function AddTask() {
     if (inputName === '') {
       notify();
     } else {
-      const currentDate = date || new Date().toISOString().substr(0, 10);
-      addTask(inputName, currentDate);
+      const rawDate = date || new Date().toISOString();
+      const parts = rawDate.split('-');
+      const formattedDate = `${parts[0]}-${parts[1]}-${parts[2]}`; // year-month-day
+      console.log(formattedDate)
+      addTask(inputName, formattedDate);
       setInputName('');
       setDate('');
     }
