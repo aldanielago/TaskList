@@ -14,7 +14,7 @@ function TaskSection(){
       <h3 className="pt-4 pl-4 font-Quicksand">Today&apos;s taks</h3>
       <section className="pl-4 w-full flex flex-col items-center">
         <AddTask/>
-        { loading && ( <> <LoadingTasks/> <LoadingTasks/> <LoadingTasks/> </> )}
+        { loading && <LoadingTasks/>}
         { error && <ErrorLoading/>}
         { tasks.map((task) => (
           <TodoItem

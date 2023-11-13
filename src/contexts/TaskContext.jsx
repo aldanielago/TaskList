@@ -12,12 +12,13 @@ function TaskProvider({ children }) {
   }
 
   // Function to add a task at the end.
-  function addTask(text, date) {
+  function addTask(text, date, projectId = null) {
     const newTask = {
       id: generateUniqueId(),
       text: text,
       date: date,
-      completed: false
+      completed: false,
+      projectId: projectId
     };
 
     setTasks([...tasks, newTask]);

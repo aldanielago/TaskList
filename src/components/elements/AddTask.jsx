@@ -22,15 +22,20 @@ function AddTask() {
     });
   }
 
+  function getCurrentLocalDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   function handleAddTask() {
     if (inputName === '') {
       notify();
     } else {
-      const rawDate = date || new Date().toISOString();
-      const parts = rawDate.split('-');
-      const formattedDate = `${parts[0]}-${parts[1]}-${parts[2]}`; // year-month-day
-      console.log(formattedDate)
-      addTask(inputName, formattedDate);
+      const rawDate = date || getCurrentLocalDate();
+      addTask(inputName, rawDate);
       setInputName('');
       setDate('');
     }

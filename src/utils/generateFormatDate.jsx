@@ -1,12 +1,4 @@
-function FormatDate({ date }) {
-  const newFormat = generateFormatDate(date);
-
-  return (
-    <span className="font-Quicksand text-xs">{newFormat}</span>
-  );
-}
-
-function generateFormatDate(dateString) {
+export function generateFormatDate(dateString) {
   const dateParts = dateString.split('-');
   const [year, month, day] = dateParts;
 
@@ -20,7 +12,6 @@ function generateFormatDate(dateString) {
     return 'yesterday';
   } else {
     const date = new Date(year, month - 1, day);
-    console.log('año: ', year, 'mes: ', month, 'dia: ', day, 'transformat a date: ', date)
     const timeDiff = date.getTime() - today.getTime();
     const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
 
@@ -55,10 +46,7 @@ function generateFormatDate(dateString) {
 function isSameDay(year, month, day, today) {
   return (
     parseInt(year, 10) === today.getFullYear() &&
-    parseInt(month, 10) === today.getMonth() + 1 && // Sumar 1 al mes
+    parseInt(month, 10) === today.getMonth() + 1 &&
     parseInt(day, 10) === today.getDate()
   );
 }
-
-
-export { FormatDate };
