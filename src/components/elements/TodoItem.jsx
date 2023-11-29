@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BsCheckCircle, BsXCircle } from 'react-icons/bs';
 import { generateFormatDate } from '../../utils/generateFormatDate';
 
-function TodoItem({ task, onComplete, onDelete}) {
+function TodoItem({ task, onComplete, onDelete, showDate = true }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [textDecoration, setTextDecoration] = useState('no-underline');
 
@@ -27,7 +27,7 @@ function TodoItem({ task, onComplete, onDelete}) {
           <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`}>
             {task.text}
           </span>
-          <span className="font-Quicksand text-xs">{generateFormatDate(task.date)}</span>
+          { showDate && <span className="text-xs font-Quicksand text-gray-font">{generateFormatDate(task.date)}</span>}
         </div>
       </div>
       <button>

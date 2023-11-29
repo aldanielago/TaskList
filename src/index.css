@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Delete the default icon withot remove the event*/
+/*Delete the default icon of the calendar icon withot remove the event*/
 input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100% !important;
   height: 100%;
