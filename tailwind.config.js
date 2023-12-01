@@ -23,7 +23,7 @@ export default {
         'secondary-light': '#F4F7FF',
         //dark theme
         'secondary-dark': '#2D2D2D',
-        'back-dark': '#1e1e1e'
+        'back-dark': '#1e1e1e',
       },
       fontFamily: {
         'Quicksand': 'Quicksand' || 'sans-serif'
