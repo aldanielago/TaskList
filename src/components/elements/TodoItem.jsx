@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { BsCheckCircle, BsXCircle } from 'react-icons/bs';
-import { generateFormatDate } from '../../utils/generateFormatDate';
+import { TaskContext } from '../../contexts/TaskContext';
 
 function TodoItem({ task, onComplete, onDelete, showDate = true }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [textDecoration, setTextDecoration] = useState('no-underline');
+  const { generateFormatDate } = useContext(TaskContext);
+  const friendlyDate = generateFormatDate(task.date);
 
   const handleButtonClick = () => {
     if (!isCompleted) {
@@ -27,7 +29,7 @@ function TodoItem({ task, onComplete, onDelete, showDate = true }) {
           <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`}>
             {task.text}
           </span>
-          { showDate && <span className="text-xs font-Quicksand text-gray-font">{generateFormatDate(task.date)}</span>}
+          { showDate && <span className="text-xs font-Quicksand text-gray-font">{friendlyDate}</span>}
         </div>
       </div>
       <button>

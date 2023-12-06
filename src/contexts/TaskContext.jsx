@@ -19,7 +19,7 @@ function TaskProvider({ children }) {
       text: text,
       date: date,
       completed: false,
-      projectId: projectId
+      projectId: projectId,
     };
 
     setTasks([...tasks, newTask]);
@@ -66,6 +66,103 @@ function TaskProvider({ children }) {
     }
   }
 
+  // This function returns the date in a friendlier format with dateString as parameter
+  function generateFormatDate(dateString) {
+    const dateParts = dateString.split('-');
+    const [ year, month, day ] = dateParts;
+
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const date = new Date(year, month - 1, day);
+    const timeDiff = date.getTime() - today.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 1;
+
+    let result;
+
+    switch (true) {
+      case daysDiff === -1:
+        result = 'yesterday';
+        break;
+      case daysDiff < 0 && daysDiff >= -7:
+        result = `${-daysDiff} days ago`;
+        break;
+      case daysDiff >= -30 && daysDiff < 0: {
+        const weeksAgo = Math.floor(-daysDiff / 7);
+        result = `${weeksAgo} weeks ago`;
+        break;
+      }
+      case date.getMonth() === today.getMonth() - 1 && daysDiff < 0:
+        result = 'last month';
+        break;
+      case daysDiff === 0:
+        result = 'today';
+        break;
+      case daysDiff === 1:
+        result = 'tomorrow';
+        break;
+      case daysDiff <= 7:
+        result = `in ${daysDiff} days`;
+        break;
+      case daysDiff <= 30: {
+        const weeksFuture = Math.floor(daysDiff / 7);
+        result = `in ${weeksFuture} weeks`;
+        break;
+      }
+      case date.getMonth() === today.getMonth() + 1:
+        result = 'next month';
+        break;
+      default:
+        result = date.toLocaleDateString();
+        break;
+    }
+
+    return result;
+  }
+
+  // This function returns the tasks filtered by date, it returns an array of objects with the task and the color class
+  function filterTasksByDate(tasks) {
+    const filteredTasks = tasks.map(task => {
+      const formattedDate = generateFormatDate(task.date);
+      let colorClass = '';
+
+      switch (formattedDate) {
+        case 'today':
+          colorClass = 'bg-red-500'; // Today
+          break;
+        case 'yesterday':
+          colorClass = 'bg-orange-500'; // Yesterday
+          break;
+        case 'tomorrow':
+          colorClass = 'bg-blue-500'; // Tomorrow
+          break;
+        case 'last month':
+          colorClass = 'bg-pink-500'; // Last month
+          break;
+        case 'next month':
+          colorClass = 'bg-red-500'; // Next month
+          break;
+        default:
+          if (formattedDate.includes('days ago')) {
+            colorClass = 'bg-yellow-500'; // Past week
+          } else if (formattedDate.includes('weeks ago')) {
+            colorClass = 'bg-purple-500'; // Past month
+          } else if (formattedDate.includes('in ') && formattedDate.includes(' days')) {
+            colorClass = 'bg-green-500'; // This week
+          } else if (formattedDate.includes('in ') && formattedDate.includes(' weeks')) {
+            colorClass = 'bg-mint-500'; // This month
+          } else {
+            colorClass = 'bg-gray-500'; // Other
+          }
+          break;
+      }
+      return { ...task, formattedDate, colorClass };
+    });
+    console.log(filteredTasks);
+    return filteredTasks;
+  }
+
   return (
     <TaskContext.Provider value={{
       loading,
@@ -75,7 +172,9 @@ function TaskProvider({ children }) {
       generateMessage,
       addTask,
       completeTask,
-      deleteTask
+      deleteTask,
+      generateFormatDate,
+      filterTasksByDate,
     }}>
       { children }
     </TaskContext.Provider>
