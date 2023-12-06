@@ -28,7 +28,7 @@ export function Home() {
           <AddTask/>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { sortedTasks.length === 0 && <InformativeBox time="today"/>}
+          { sortedTasks.length === 0 && <InformativeBox time="for today"/>}
           { sortedTasks.map((task) => (
             <TodoItem
               key={task.id}
