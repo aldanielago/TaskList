@@ -4,7 +4,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const ProjectContext = createContext();
 
 function ProjectProvider({ children }) {
-  const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('TASKS_V1', []);
+  const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('PROJECTS_V1', []);
 
   const projectsPallete = [
     { pallete: 1, name:'Blue', bgColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
@@ -21,12 +21,12 @@ function ProjectProvider({ children }) {
   }
 
   // Add a project
-  function createProject(name, tasks, palleteId) {
+  function createProject(name, palleteId) {
     const newProject = {
       id: generateUniqueId(),
       name: name,
-      tasks: tasks,
-      palleteId: palleteId,
+      bgColor: projectsPallete[palleteId - 1].bgColor,
+      secondaryColor: projectsPallete[palleteId - 1].secondaryColor,
     };
 
     setProjects([...projects, newProject]);

@@ -8,9 +8,11 @@ import { ErrorLoading } from "../states/ErrorLoading";
 import { TaskContext } from "../../contexts/TaskContext";
 import { PrimaryButton } from "../buttons/PrimaryButton";
 import { InformativeBox } from "../elements/InformativeBox";
+import { ProjectContext } from "../../contexts/ProjectsContext";
 
 export function Home() {
   const { loading, error, tasks, generateMessage, deleteTask, completeTask } = useContext(TaskContext);
+  const { projects } = useContext(ProjectContext);
 
   const sortedTasks = tasks.slice().sort((a, b) => {
     const dateA = new Date(a.date);
@@ -22,7 +24,7 @@ export function Home() {
     <section>
       <h1 className="font-Quicksand font-bold text-lg pl-4 pt-4">Hi there!</h1>
       { generateMessage() }
-      <section className="flex">
+      <section className="flex flex-col md:flex-row">
         <section className="pl-4 w-full flex flex-col items-center">
           <h3 className="pt-4 pl-4 font-Quicksand self-start">Today&apos;s taks</h3>
           <AddTask/>
@@ -45,7 +47,15 @@ export function Home() {
           <h3 className="pt-4 pl-4 font-Quicksand self-start">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          <ProjectItem/>
+          { projects.length === 0 && <InformativeBox time=""/>}
+          { projects.map((project) => (
+            <ProjectItem
+              key={project.id}
+              name={project.name}
+              team={project.bgColor}
+              colorProgressBar={project.secondaryColor}
+            />
+          ))}
           <Link to="/add-project">
             <PrimaryButton text="Add a project"/>
           </Link>
