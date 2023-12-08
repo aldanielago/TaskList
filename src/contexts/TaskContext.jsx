@@ -159,7 +159,6 @@ function TaskProvider({ children }) {
       }
       return { ...task, formattedDate, colorClass };
     });
-    console.log(filteredTasks);
     return filteredTasks;
   }
 
