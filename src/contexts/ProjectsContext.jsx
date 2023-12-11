@@ -37,8 +37,21 @@ function ProjectProvider({ children }) {
     setProjects(projects.filter( p => p.id !== idProject ));
   }
 
+  function addTaskToProject(idProject, task) {
+    setProjects(projects.map( p => {
+      if(p.id === idProject){
+        return {
+          ...p,
+          tasks: [...p.tasks, task]
+        }
+      } else {
+        return p
+      }
+    }))
+  }
+
   return (
-    <ProjectContext.Provider value={{ projects, createProject, deleteProject, loading, error, projectsPallete }}>
+    <ProjectContext.Provider value={{ projects, createProject, deleteProject, loading, error, projectsPallete, addTaskToProject }}>
       {children}
     </ProjectContext.Provider>
   )

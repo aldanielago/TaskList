@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
-import { TaskContext } from "../../contexts/TaskContext";
-import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from 'react-toastify';
+import { TaskContext } from "../../contexts/TaskContext";
+import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
 
 function AddTask() {
   const [ inputName, setInputName ] = useState('');
@@ -30,6 +30,7 @@ function AddTask() {
     return `${year}-${month}-${day}`;
   }
 
+  // In case the user doesn't type the task name, a toast will be shown
   function handleAddTask() {
     if (inputName === '') {
       notify();

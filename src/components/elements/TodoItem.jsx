@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
-import { BsCheckCircle, BsXCircle } from 'react-icons/bs';
+import { BsCheckCircle } from 'react-icons/bs';
 import { TaskContext } from '../../contexts/TaskContext';
+import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
 
-function TodoItem({ task, onComplete, onDelete, showDate = true }) {
+function TodoItem({ task, onDelete, onComplete, showDate = true }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [textDecoration, setTextDecoration] = useState('no-underline');
   const { generateFormatDate } = useContext(TaskContext);
@@ -32,9 +33,7 @@ function TodoItem({ task, onComplete, onDelete, showDate = true }) {
           { showDate && <span className="text-xs font-Quicksand text-gray-font">{friendlyDate}</span>}
         </div>
       </div>
-      <button>
-        <BsXCircle onClick={onDelete} size={30} className="text-zinc-400 hover:text-red-400 transition-colors ease-linear "/>
-      </button>
+      <SmallOptionsMenu onDelete={onDelete}/>
     </div>
   );
 

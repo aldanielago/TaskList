@@ -30,7 +30,7 @@ export function Home() {
           <AddTask/>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { sortedTasks.length === 0 && <InformativeBox time="for today"/>}
+          { sortedTasks.length === 0 && <InformativeBox item="tasks" time="for today"/>}
           { sortedTasks.map((task) => (
             <TodoItem
               key={task.id}
@@ -47,7 +47,7 @@ export function Home() {
           <h3 className="pt-4 pl-4 font-Quicksand self-start">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { projects.length === 0 && <InformativeBox time=""/>}
+          { projects.length === 0 && <InformativeBox item="projects" time="for today"/>}
           { projects.map((project) => (
             <ProjectItem
               key={project.id}
