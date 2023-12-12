@@ -11,14 +11,20 @@ import { InformativeBox } from "../elements/InformativeBox";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
 export function Home() {
-  const { loading, error, tasks, generateMessage, deleteTask, completeTask } = useContext(TaskContext);
-  const { projects } = useContext(ProjectContext);
+  const { loading, error, tasks, generateMessage, deleteTask, completeTask, notifyEventListeners } = useContext(TaskContext);
+  const { projects, addTaskToProject } = useContext(ProjectContext);
 
   const sortedTasks = tasks.slice().sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
     return dateA - dateB;
   });
+
+  // Function to add a project to a task in both contexts
+  const addProject = (taskId, projectId) => {
+    addTaskToProject(projectId, taskId);
+    notifyEventListeners();
+  }
 
   return (
     <section>
@@ -37,6 +43,7 @@ export function Home() {
               task={task}
               onComplete={() => { completeTask(task.id) }}
               onDelete={() => { deleteTask(task.id) }}
+              onAddProject={ addProject }
             />
           ))}
           <Link to="/tasks">
@@ -51,9 +58,7 @@ export function Home() {
           { projects.map((project) => (
             <ProjectItem
               key={project.id}
-              name={project.name}
-              team={project.bgColor}
-              colorProgressBar={project.secondaryColor}
+              project={project}
             />
           ))}
           <Link to="/add-project">

@@ -1,11 +1,19 @@
-import { createContext } from "react";
+import { createContext, useState, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const TaskContext = createContext();
 
 function TaskProvider({ children }) {
   const { item: tasks, updateInfo: setTasks, loading, error } = useLocalStorage('TASKS_V1', []);
-  let noTasks = false;
+  const [eventListeners, setEventListeners] = useState([]);
+
+  const subscribeToEvents = (listener) => {
+    setEventListeners((prevListeners) => [...prevListeners, listener]);
+  };
+
+  const notifyEventListeners = () => {
+    eventListeners.forEach((listener) => listener());
+  };
 
   // Function to generate ids
   function generateUniqueId() {
@@ -13,13 +21,12 @@ function TaskProvider({ children }) {
   }
 
   // Function to add a task at the end.
-  function addTask(text, date, projectId = null) {
+  function addTask(text, date ) {
     const newTask = {
       id: generateUniqueId(),
       text: text,
       date: date,
-      completed: false,
-      projectId: projectId,
+      completed: false
     };
 
     setTasks([...tasks, newTask]);
@@ -48,7 +55,6 @@ function TaskProvider({ children }) {
   function generateMessage() {
     const completedTasks = tasks.filter( task => task.completed ).length;
     if(completedTasks == tasks.length && tasks.length == 0){
-      noTasks = true;
       return (
         <p className="text-xs pl-4 font-Quicksand text-gray-font"> No tasks, you can rest for today 😎</p>
       )
@@ -167,17 +173,23 @@ function TaskProvider({ children }) {
       loading,
       error,
       tasks,
-      noTasks,
       generateMessage,
       addTask,
       completeTask,
       deleteTask,
       generateFormatDate,
       filterTasksByDate,
+      subscribeToEvents,
+      notifyEventListeners,
+      useTaskContext
     }}>
       { children }
     </TaskContext.Provider>
   )
 }
+
+const useTaskContext = () => {
+  return useContext(TaskContext);
+};
 
 export { TaskContext, TaskProvider }

@@ -27,6 +27,7 @@ function ProjectProvider({ children }) {
       name: name,
       bgColor: projectsPallete[palleteId - 1].bgColor,
       secondaryColor: projectsPallete[palleteId - 1].secondaryColor,
+      tasks: []
     };
 
     setProjects([...projects, newProject]);
@@ -37,17 +38,43 @@ function ProjectProvider({ children }) {
     setProjects(projects.filter( p => p.id !== idProject ));
   }
 
-  function addTaskToProject(idProject, task) {
-    setProjects(projects.map( p => {
-      if(p.id === idProject){
-        return {
-          ...p,
-          tasks: [...p.tasks, task]
+  function removeTaskFromProject(taskId) {
+    setProjects((prevProjects) => {
+      return prevProjects.map((p) => {
+        if (p.tasks !== undefined) {
+          const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
+          return {
+            ...p,
+            tasks: newTasks
+          };
+        } else {
+          return p;
         }
-      } else {
-        return p
-      }
-    }))
+      });
+    });
+  }
+
+  function addTaskToProject(idProject, task) {
+    removeTaskFromProject(task);
+    setProjects((prevProjects) => {
+      return prevProjects.map((p) => {
+        if (p.id === idProject) {
+          if (p.tasks === undefined) {
+            return {
+              ...p,
+              tasks: [task]
+            };
+          } else {
+            return {
+              ...p,
+              tasks: [...p.tasks, task]
+            };
+          }
+        } else {
+          return p;
+        }
+      });
+    });
   }
 
   return (
