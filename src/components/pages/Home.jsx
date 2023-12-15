@@ -12,7 +12,7 @@ import { ProjectContext } from "../../contexts/ProjectsContext";
 
 export function Home() {
   const { loading, error, tasks, generateMessage, deleteTask, completeTask, notifyEventListeners } = useContext(TaskContext);
-  const { projects, addTaskToProject } = useContext(ProjectContext);
+  const { projects, addTaskToProject, removeTaskFromProject } = useContext(ProjectContext);
 
   const sortedTasks = tasks.slice().sort((a, b) => {
     const dateA = new Date(a.date);
@@ -20,9 +20,14 @@ export function Home() {
     return dateA - dateB;
   });
 
-  // Function to add a project to a task in both contexts
   const addProject = (taskId, projectId) => {
     addTaskToProject(projectId, taskId);
+    notifyEventListeners();
+  }
+
+  const deleteATask = (taskId) => {
+    deleteTask(taskId);
+    removeTaskFromProject(taskId);
     notifyEventListeners();
   }
 
@@ -32,7 +37,7 @@ export function Home() {
       { generateMessage() }
       <section className="flex flex-col md:flex-row">
         <section className="pl-4 w-full flex flex-col items-center">
-          <h3 className="pt-4 pl-4 font-Quicksand self-start">Today&apos;s taks</h3>
+          <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Today&apos;s taks</h3>
           <AddTask/>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
@@ -42,7 +47,7 @@ export function Home() {
               key={task.id}
               task={task}
               onComplete={() => { completeTask(task.id) }}
-              onDelete={() => { deleteTask(task.id) }}
+              onDelete={() => { deleteATask(task.id) }}
               onAddProject={ addProject }
             />
           ))}
@@ -50,11 +55,11 @@ export function Home() {
             <PrimaryButton text="See more"/>
           </Link>
         </section>
-        <section className="pl-4 w-full flex flex-col items-center">
-          <h3 className="pt-4 pl-4 font-Quicksand self-start">Projects</h3>
+        <section className="pl-4 w-full flex flex-col items-center ">
+          <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { projects.length === 0 && <InformativeBox item="projects" time="for today"/>}
+          { projects.length === 0 && <InformativeBox item="projects yet."/>}
           { projects.map((project) => (
             <ProjectItem
               key={project.id}

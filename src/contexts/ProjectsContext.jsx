@@ -7,12 +7,12 @@ function ProjectProvider({ children }) {
   const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('PROJECTS_V1', []);
 
   const projectsPallete = [
-    { pallete: 1, name:'Blue', bgColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
-    { pallete: 2, name:'Green', bgColor: 'bg-light-green', secondaryColor: 'bg-very-light-green' },
-    { pallete: 3, name:'Pink', bgColor: 'bg-light-pink', secondaryColor: 'bg-very-light-pink' },
-    { pallete: 4, name:'Yellow', bgColor: 'bg-light-yellow', secondaryColor: 'bg-very-light-yellow' },
-    { pallete: 5, name:'Menta', bgColor: 'bg-menta', secondaryColor: 'bg-light-menta' },
-    { pallete: 6, name:'Purple', bgColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
+    { pallete: 0, name:'Blue', bgColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
+    { pallete: 1, name:'Green', bgColor: 'bg-light-green', secondaryColor: 'bg-very-light-green' },
+    { pallete: 2, name:'Pink', bgColor: 'bg-light-pink', secondaryColor: 'bg-very-light-pink' },
+    { pallete: 3, name:'Yellow', bgColor: 'bg-light-yellow', secondaryColor: 'bg-very-light-yellow' },
+    { pallete: 4, name:'Menta', bgColor: 'bg-menta', secondaryColor: 'bg-light-menta' },
+    { pallete: 5, name:'Purple', bgColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
   ];
 
   // Function to generate ids
@@ -25,8 +25,8 @@ function ProjectProvider({ children }) {
     const newProject = {
       id: generateUniqueId(),
       name: name,
-      bgColor: projectsPallete[palleteId - 1].bgColor,
-      secondaryColor: projectsPallete[palleteId - 1].secondaryColor,
+      bgColor: projectsPallete[palleteId].bgColor,
+      secondaryColor: projectsPallete[palleteId].secondaryColor,
       tasks: []
     };
 
@@ -39,46 +39,53 @@ function ProjectProvider({ children }) {
   }
 
   function removeTaskFromProject(taskId) {
-    setProjects((prevProjects) => {
-      return prevProjects.map((p) => {
-        if (p.tasks !== undefined) {
-          const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
-          return {
-            ...p,
-            tasks: newTasks
-          };
-        } else {
-          return p;
-        }
-      });
+    const newProjects = projects.map((p) => {
+      if (p.tasks !== undefined) {
+        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
+        return {
+          ...p,
+          tasks: newTasks
+        };
+      } else {
+        return p;
+      }
     });
+    setProjects(newProjects);
   }
 
   function addTaskToProject(idProject, task) {
     removeTaskFromProject(task);
-    setProjects((prevProjects) => {
-      return prevProjects.map((p) => {
-        if (p.id === idProject) {
-          if (p.tasks === undefined) {
-            return {
-              ...p,
-              tasks: [task]
-            };
-          } else {
-            return {
-              ...p,
-              tasks: [...p.tasks, task]
-            };
-          }
+    const newProjects = projects.map((p) => {
+      if (p.id === idProject) {
+        if (p.tasks === undefined) {
+          return {
+            ...p,
+            tasks: [task]
+          };
         } else {
-          return p;
+          return {
+            ...p,
+            tasks: [...p.tasks, task]
+          };
         }
-      });
+      } else {
+        return p;
+      }
     });
+    setProjects(newProjects);
   }
 
   return (
-    <ProjectContext.Provider value={{ projects, createProject, deleteProject, loading, error, projectsPallete, addTaskToProject }}>
+    <ProjectContext.Provider value={{
+      projects,
+      error,
+      loading,
+      projectsPallete,
+      createProject,
+      addTaskToProject,
+      deleteProject,
+      removeTaskFromProject,
+    }}>
       {children}
     </ProjectContext.Provider>
   )

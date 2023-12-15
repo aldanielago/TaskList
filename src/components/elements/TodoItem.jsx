@@ -36,7 +36,7 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
           <div className='flex'>
             { showDate && <span className="text-xs font-Quicksand inline text-gray-font">{friendlyDate}</span>}
             { (showDate && projectTask) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
-            { projectTask && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font">{projectTask.name}</span>}
+            { projectTask && <span className="text-xs inline-block font-Quicksand text-gray-font">{projectTask.name}</span>}
           </div>
         </div>
       </div>

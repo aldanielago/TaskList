@@ -31,7 +31,6 @@ export function AddProjectPage() {
       ...project,
       [e.target.name]: e.target.value
     });
-    console.log(project);
   }
 
   function handleAddProject() {

@@ -17,7 +17,7 @@ export function TasksPage() {
     }
 
     return (
-      <div className="mb-4 w-1/2">
+      <div className="mb-4 md:w-3/4">
         <h3 className="font-Quicksand text-base font-bold mb-2">{title}</h3>
         {filteredTasks.map((task) => (
           <TodoItem
@@ -33,10 +33,9 @@ export function TasksPage() {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="font-Quicksand font-bold text-lg mb-4">Tasks</h1>
+    <div className="p-10">
+      <h1 className="font-Quicksand font-bold text-lg">Tasks</h1>
       <p className="text-xs font-Quicksand text-gray-font mb-4">You have the next schedule tasks...</p>
-
       <section className="flex flex-col">
         <div className='w-full pr-4'>
           {loading && <LoadingTasks />}
