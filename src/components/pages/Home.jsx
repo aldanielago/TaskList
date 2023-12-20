@@ -61,10 +61,11 @@ export function Home() {
           { error && <ErrorLoading/>}
           { projects.length === 0 && <InformativeBox item="projects yet."/>}
           { projects.map((project) => (
-            <ProjectItem
-              key={project.id}
-              project={project}
-            />
+            <Link to={`/projects/${project.id}`} key={project.id} className="w-full block self-center">
+              <ProjectItem
+                project={project}
+              />
+            </Link>
           ))}
           <Link to="/add-project">
             <PrimaryButton text="Add a project"/>

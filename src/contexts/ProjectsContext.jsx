@@ -77,13 +77,13 @@ function ProjectProvider({ children }) {
 
   return (
     <ProjectContext.Provider value={{
-      projects,
       error,
       loading,
+      projects,
       projectsPallete,
       createProject,
-      addTaskToProject,
       deleteProject,
+      addTaskToProject,
       removeTaskFromProject,
     }}>
       {children}

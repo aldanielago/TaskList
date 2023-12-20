@@ -47,10 +47,10 @@ export function AddProjectPage() {
   }
 
   return (
-    <section className="flex flex-col items-center gap-4">
+    <section className="">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <h1 className="font-Quicksand font-bold text-xl pl-4 pt-12">Add a project</h1>
-      <form className="flex flex-col border border-light-blue p-8 gap-8 rounded-md">
+      <form className="flex flex-col pl-4 pt-4">
         <label className="flex flex-col gap-3">
           <span className="font-Quicksand">Escribe el nombre del proyecto: </span>
           <input className="font-Quicksand border border-light-blue rounded-md p-2" type="text" name="name" onChange={(e) => handleChange(e)}  placeholder="Project's name"/>

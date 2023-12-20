@@ -33,7 +33,7 @@ export function TasksPage() {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-6">
       <h1 className="font-Quicksand font-bold text-lg">Tasks</h1>
       <p className="text-xs font-Quicksand text-gray-font mb-4">You have the next schedule tasks...</p>
       <section className="flex flex-col">

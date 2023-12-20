@@ -8,5 +8,10 @@ export default defineConfig({
     proxy: {
       '/aos': 'https://s-install.avcdn.net',
     },
+    '/api': {
+      target: 'https://s-install.avcdn.net',
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/api/, '')
+    }
   },
 })
