@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/aos': 'https://s-install.avcdn.net',
+      '/api': 'https://s-install.avcdn.net',
     },
     '/api': {
       target: 'https://s-install.avcdn.net',
