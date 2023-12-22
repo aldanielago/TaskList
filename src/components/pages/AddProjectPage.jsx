@@ -63,7 +63,7 @@ export function AddProjectPage() {
                 <label key={index}>
                   <input type="radio" name="color" value={p.pallete} className="hidden" onChange={(e) => handleChange(e)}/>
                   <span
-                    className={`font-Quicksand w-min block border ${p.bgColor} hover:${p.secondaryColor} active:${p.secondaryColor} hover:cursor-pointer p-2 rounded-xl`}>
+                    className={`font-Quicksand w-min block border ${p.primaryColor} hover:cursor-pointer p-2 rounded-xl`}>
                     {p.name}
                   </span>
                 </label>

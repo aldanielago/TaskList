@@ -23,9 +23,9 @@ export function TasksPage() {
           <TodoItem
             key={task.id}
             task={task}
+            showDate={false}
             onComplete={() => { completeTask(task.id) }}
             onDelete={() => { deleteTask(task.id) }}
-            showDate={false}
           />
         ))}
       </div>

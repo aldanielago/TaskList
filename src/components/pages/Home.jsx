@@ -31,10 +31,12 @@ export function Home() {
     notifyEventListeners();
   }
 
+  const message = generateMessage(tasks);
+
   return (
     <section>
       <h1 className="font-Quicksand font-bold text-lg pl-4 pt-4">Hi there!</h1>
-      { generateMessage() }
+      { message }
       <section className="flex flex-col md:flex-row">
         <section className="pl-4 w-full flex flex-col items-center">
           <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Today&apos;s taks</h3>

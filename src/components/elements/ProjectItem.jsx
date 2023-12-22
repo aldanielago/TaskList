@@ -1,6 +1,6 @@
 function ProjectItem({ project }){
   return (
-    <div className={`${project.bgColor} max-w-lg p-3 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md`}>
+    <div className={`${project.primaryColor} max-w-lg p-3 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md`}>
       <div className="flex flex-col justify-between">
         <p className="font-Quicksand text-sm">{ project.name }</p>
         { project.tasks.length > 0

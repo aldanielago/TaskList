@@ -52,7 +52,8 @@ function TaskProvider({ children }) {
   }
 
   // This function generates a messages in base on the completed tasks and its lenght
-  function generateMessage() {
+  function generateMessage(tasks) {
+    if(tasks == []) return null
     const completedTasks = tasks.filter( task => task.completed ).length;
     if(completedTasks == tasks.length && tasks.length == 0){
       return (
@@ -129,6 +130,8 @@ function TaskProvider({ children }) {
 
   // This function returns the tasks filtered by date, it returns an array of objects with the task and the color class
   function filterTasksByDate(tasks) {
+    console.log('Tasks: ',tasks);
+    if(tasks == []) return null
     const filteredTasks = tasks.map(task => {
       const formattedDate = generateFormatDate(task.date);
       let colorClass = '';
@@ -173,15 +176,15 @@ function TaskProvider({ children }) {
       loading,
       error,
       tasks,
-      generateMessage,
       addTask,
-      completeTask,
       deleteTask,
-      generateFormatDate,
+      completeTask,
+      useTaskContext,
+      generateMessage,
       filterTasksByDate,
       subscribeToEvents,
+      generateFormatDate,
       notifyEventListeners,
-      useTaskContext
     }}>
       { children }
     </TaskContext.Provider>
