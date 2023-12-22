@@ -21,24 +21,28 @@ export function ProjectPage() {
   }
 
   return (
-    <section>
-      <div className={`${project.primaryColor} w-full h-1/4`}></div>
-      <h1>{ project.name }</h1>
-      { message }
-      { filteredTasks.length == 0 && <InformativeBox item="projects yet."/>}
-      { filteredTasks.length > 0 && <>
-        <h2>Tasks</h2>
-        {filteredTasks.map(task => (
-        <TodoItem
-          key={task.id}
-          task={task}
-          showDate={false}
-          onComplete={() => { completeTask(task.id) }}
-          onDelete={() => { deleteATask(task.id) }}
-          onAddProject={ addProject }
-        />
-      ))}
-      </>}
+    <section className="w-full h-full">
+      <div className={`${project.primaryColor} w-full h-28`}></div>
+      <div className="px-4">
+        <h1 className="font-bold tracking-wide font-Quicksand text-lg mt-2">{ project.name }</h1>
+        { message }
+        { filteredTasks.length == 0 && <InformativeBox item="projects yet."/>}
+        { filteredTasks.length > 0 && <>
+          <h2 className="font-Quicksand font-semibold mt-4">Tasks</h2>
+          <div className="flex items-center flex-col">
+            {filteredTasks.map(task => (
+            <TodoItem
+              key={task.id}
+              task={task}
+              showDate={false}
+              onComplete={() => { completeTask(task.id) }}
+              onDelete={() => { deleteATask(task.id) }}
+              onAddProject={ addProject }
+            />
+          ))}
+          </div>
+        </>}
+      </div>
     </section>
   )
 }

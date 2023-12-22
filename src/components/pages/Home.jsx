@@ -34,8 +34,8 @@ export function Home() {
   const message = generateMessage(tasks);
 
   return (
-    <section>
-      <h1 className="font-Quicksand font-bold text-lg pl-4 pt-4">Hi there!</h1>
+    <section className="pl-4 pt-4">
+      <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
       { message }
       <section className="flex flex-col md:flex-row">
         <section className="pl-4 w-full flex flex-col items-center">

@@ -57,15 +57,15 @@ function TaskProvider({ children }) {
     const completedTasks = tasks.filter( task => task.completed ).length;
     if(completedTasks == tasks.length && tasks.length == 0){
       return (
-        <p className="text-xs pl-4 font-Quicksand text-gray-font"> No tasks, you can rest for today 😎</p>
+        <p className="text-xs font-Quicksand text-gray-font"> No tasks, you can rest for today 😎</p>
       )
     } if (completedTasks == tasks.length && tasks.length != 0) {
       return (
-        <p className="text-xs pl-4 font-Quicksand text-gray-font"> You have done everything for today! Keep going 😉 </p>
+        <p className="text-xs font-Quicksand text-gray-font"> You have done everything for today! Keep going 😉 </p>
       )
     } else {
       return (
-        <p className="pl-4 text-xs font-Quicksand text-gray-font">You have finished
+        <p className="text-xs font-Quicksand text-gray-font">You have finished
           <span className="font-bold ml-1">{completedTasks}</span> of
           <span className="font-bold ml-1">{tasks.length}</span> tasks.
         </p>
