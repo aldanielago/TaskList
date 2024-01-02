@@ -40,7 +40,7 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
           </div>
         </div>
       </div>
-      <SmallOptionsMenu task={task} onDelete={onDelete} onAddProject={onAddProject}/>
+      <SmallOptionsMenu item={task} onDelete={onDelete} onAddProject={onAddProject}/>
     </div>
   );
 

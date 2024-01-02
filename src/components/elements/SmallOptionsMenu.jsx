@@ -2,7 +2,7 @@ import { MdOutlineMoreHoriz } from "react-icons/md";
 import { ProjectContext } from '../../contexts/ProjectsContext';
 import { useState, useRef, useEffect, useContext } from 'react';
 
-export function SmallOptionsMenu({ task, onDelete, onAddProject }) {
+export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   const { projects } = useContext(ProjectContext);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ toAddProject, setToAddProject] = useState(false);
@@ -12,7 +12,6 @@ export function SmallOptionsMenu({ task, onDelete, onAddProject }) {
     setIsOpen(!isOpen);
   };
 
-  // TODO: Open the modal to add the task to a project
   const handleAddToProjectClick = () => {
     setIsOpen(false);
     setToAddProject(true);
@@ -23,8 +22,13 @@ export function SmallOptionsMenu({ task, onDelete, onAddProject }) {
     setIsOpen(false);
   };
 
+  // TODO: Fix this function
+  // const handleEditClick = () => {
+  //   setIsOpen(false);
+  // }
+
   const addProject = (p) => {
-    onAddProject(task.id, p.id);
+    onAddProject(item.id, p.id);
     setToAddProject(false);
   }
 
@@ -50,19 +54,18 @@ export function SmallOptionsMenu({ task, onDelete, onAddProject }) {
       {isOpen && (
         <div ref={menuRef} className="origin-top absolute mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1">
-            {}
-            <button
+            { onAddProject && <button
               onClick={handleAddToProjectClick}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             >
               Add to Project
-            </button>
-            <button
+            </button>}
+            { onDelete && <button
               onClick={handleDeleteClick}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             >
               Delete
-            </button>
+            </button>}
           </div>
         </div>
       )}
