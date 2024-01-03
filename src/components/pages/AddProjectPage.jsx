@@ -3,10 +3,11 @@ import { PrimaryButton } from "../buttons/PrimaryButton"
 import { ProjectContext } from "../../contexts/ProjectsContext"
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function AddProjectPage() {
   const { projectsPallete, createProject } = useContext(ProjectContext);
+  const navigate = useNavigate();
 
   const notify = () => {
       toast('Remember fill all the information', {
@@ -23,7 +24,7 @@ export function AddProjectPage() {
 
   const [ project, setProject ] = useState({
     name: '',
-    color: '',
+    color: '0',
   });
 
   function handleChange(e) {
@@ -34,7 +35,7 @@ export function AddProjectPage() {
   }
 
   function handleAddProject() {
-    if(project.name === '' || project.color === '') {
+    if(project.name === '') {
       notify();
       return;
     } else {
@@ -43,6 +44,7 @@ export function AddProjectPage() {
         name: '',
         color: '',
       });
+      navigate('/');
     }
   }
 
@@ -70,9 +72,7 @@ export function AddProjectPage() {
               )})}
           </div>
         </label>
-        <Link to={project.name && project.color ? '/' : ''} className="self-center">
-          <PrimaryButton text="Add project" onClick={handleAddProject}/>
-        </Link>
+        <PrimaryButton text="Add project" onClick={handleAddProject}/>
       </form>
     </section>
   )

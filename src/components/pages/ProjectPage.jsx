@@ -8,7 +8,7 @@ import { ProjectContext } from '../../contexts/ProjectsContext';
 
 export function ProjectPage() {
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject } = useContext(ProjectContext);
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject } = useContext(ProjectContext);
   const navigate = useNavigate();
   const inputRef = useRef(null);
 
@@ -20,8 +20,7 @@ export function ProjectPage() {
   const [ editName, setEditName ] = useState(false);
   const [ projectName, setProjectName ] = useState(project.name);
 
-  // const [ editPallete, setEditPallete ] = useState(false);
-  // const [ projectPallete, setProjectPallete ] = useState(project.primaryColor);
+  const [ editPallete, setEditPallete ] = useState(false);
 
   const deleteATask = (taskId) => {
     deleteTask(taskId);
@@ -32,6 +31,11 @@ export function ProjectPage() {
   const onDeleteProject = () => {
     deleteProject(project.id);
     navigate('/');
+  }
+
+  const handleChangePallete = (newPalleteId) => {
+    setEditPallete(false);
+    changePalleteProject(project.id, newPalleteId);
   }
 
   useEffect(() => {
@@ -51,22 +55,30 @@ export function ProjectPage() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      // Confirmar la edición al presionar "Enter"
       changeNameProject(project.id, projectName);
       setEditName(false);
     } else if (e.key === 'Escape') {
-      // Cancelar la edición al presionar "Escape"
       setEditName(false);
     }
   };
 
-  // const handleChangePallete = (newPalleteId) => {
-  //   changePalleteProject(project.id, newPalleteId);
-  // }
-
   return (
     <section className="w-full h-full flex flex-col items-center justify-center">
-      <div className={`${project.primaryColor} w-full h-28`}></div>
+      <div className={`${project.primaryColor} w-full h-28 relative`}>
+        <button className={`p-2 rounded-md border ${project.primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
+            onClick={() => setEditPallete(!editPallete)}
+          >Change color
+        </button>
+      </div>
+      { editPallete && <div className="w-40 origin-top absolute right-4 top-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        {projectsPallete.map( p =>
+          <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
+            key={p.pallete}
+            value={p.pallete}
+            onClick={() => {handleChangePallete(p.pallete)}}
+          >{p.name}
+          </button>)}
+      </div>}
       <div className="px-4 max-w-7xl grid w-full items-start">
         <div className="flex items-center mt-6 gap-2">
           <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
