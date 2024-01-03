@@ -51,6 +51,19 @@ function TaskProvider({ children }) {
     setTasks(tasks.filter( t => t.id !== idTask ))
   }
 
+  function editTextTask(idTask, newText) {
+    setTasks(tasks.map(t => {
+      if(t.id === idTask){
+        return {
+          ...t,
+          text: newText
+        }
+      } else {
+        return t
+      }
+    }))
+  }
+
   // This function generates a messages in base on the completed tasks and its lenght
   function generateMessage(tasks) {
     if(tasks == []) return null
@@ -178,6 +191,7 @@ function TaskProvider({ children }) {
       tasks,
       addTask,
       deleteTask,
+      editTextTask,
       completeTask,
       useTaskContext,
       generateMessage,

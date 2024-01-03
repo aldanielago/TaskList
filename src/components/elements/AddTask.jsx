@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import { TaskContext } from "../../contexts/TaskContext";
 import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
+import { TextInput } from "./TextInput";
 
 function AddTask() {
   const [ inputName, setInputName ] = useState('');
@@ -46,14 +47,7 @@ function AddTask() {
     <>
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <section className="max-w-lg p-3 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md border-slate-400 border border-opacity-5">
-        <input
-          id="nameTask"
-          type="text"
-          placeholder="Task name"
-          value={inputName}
-          className="pl-0 pb-1 font-Quicksand text-sm border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-primary-blue transition-colors ease-linear delay-200 duration-150 form-input w-1/2"
-          onChange={(e) => setInputName(e.target.value)}
-        />
+        <TextInput item={null} value={inputName} onChange={setInputName} setEdit={null} mainFunction={handleAddTask} text={'small'} placeholder={"Task's name"}/>
         <div className="flex items-center gap-3">
           <div className="relative flex items-center">
             <input
