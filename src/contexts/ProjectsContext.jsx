@@ -38,13 +38,27 @@ function ProjectProvider({ children }) {
     setProjects(projects.filter( p => p.id !== idProject ));
   }
 
-  function removeTaskFromProject(taskId) {
+  function changeNameProject(idProject, newName) {
     const newProjects = projects.map((p) => {
-      if (p.tasks !== undefined) {
-        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
+      if (p.id === idProject) {
         return {
           ...p,
-          tasks: newTasks
+          name: newName
+        };
+      } else {
+        return p;
+      }
+    });
+    setProjects(newProjects);
+  }
+
+  function changePalleteProject(idProject, idPallete) {
+    const newProjects = projects.map((p) => {
+      if (p.id === idProject) {
+        return {
+          ...p,
+          primaryColor: projectsPallete[idPallete].primaryColor,
+          secondaryColor: projectsPallete[idPallete].secondaryColor,
         };
       } else {
         return p;
@@ -75,6 +89,21 @@ function ProjectProvider({ children }) {
     setProjects(newProjects);
   }
 
+  function removeTaskFromProject(taskId) {
+    const newProjects = projects.map((p) => {
+      if (p.tasks !== undefined) {
+        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
+        return {
+          ...p,
+          tasks: newTasks
+        };
+      } else {
+        return p;
+      }
+    });
+    setProjects(newProjects);
+  }
+
   return (
     <ProjectContext.Provider value={{
       error,
@@ -85,6 +114,8 @@ function ProjectProvider({ children }) {
       deleteProject,
       addTaskToProject,
       removeTaskFromProject,
+      changeNameProject,
+      changePalleteProject,
     }}>
       {children}
     </ProjectContext.Provider>

@@ -22,11 +22,6 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
     setIsOpen(false);
   };
 
-  // TODO: Fix this function
-  // const handleEditClick = () => {
-  //   setIsOpen(false);
-  // }
-
   const addProject = (p) => {
     onAddProject(item.id, p.id);
     setToAddProject(false);
@@ -58,7 +53,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
               onClick={handleAddToProjectClick}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             >
-              Add to Project
+              Add to aoject
             </button>}
             { onDelete && <button
               onClick={handleDeleteClick}
