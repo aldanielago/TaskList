@@ -3,7 +3,7 @@ import { ProjectContext } from '../../contexts/ProjectsContext';
 import { useState, useRef, useEffect, useContext } from 'react';
 
 export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
-  const { projects } = useContext(ProjectContext);
+  const { projects, removeTaskFromProject } = useContext(ProjectContext);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ toAddProject, setToAddProject] = useState(false);
   const menuRef = useRef(null);
@@ -23,9 +23,10 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   };
 
   const addProject = (p) => {
+    removeTaskFromProject(item.id);
     onAddProject(item.id, p.id);
     setToAddProject(false);
-  }
+  };
 
   // This function close the menu when the user clicks outside of it
   useEffect(() => {
@@ -53,7 +54,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
               onClick={handleAddToProjectClick}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             >
-              Add to aoject
+              Add to project
             </button>}
             { onDelete && <button
               onClick={handleDeleteClick}
@@ -69,8 +70,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
           {projects.map( p => <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             key={p.id}
             value={p.id}
-            onClick={() => {addProject(p)}
-          }
+            onClick={() => { addProject(p) }}
         >{p.name}</button>)}
         </div>
       </>}

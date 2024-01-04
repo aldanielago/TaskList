@@ -10,7 +10,7 @@ export function AddProjectPage() {
   const navigate = useNavigate();
 
   const notify = () => {
-      toast('Remember fill all the information', {
+      toast('Please, fill all the information. ', {
       position: "top-center",
       autoClose: 1000,
       hideProgressBar: false,

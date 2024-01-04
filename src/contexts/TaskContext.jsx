@@ -15,15 +15,10 @@ function TaskProvider({ children }) {
     eventListeners.forEach((listener) => listener());
   };
 
-  // Function to generate ids
-  function generateUniqueId() {
-    return Date.now(); // It uses the timestamp as id
-  }
-
   // Function to add a task at the end.
-  function addTask(text, date ) {
+  function addTask(id, text, date ) {
     const newTask = {
-      id: generateUniqueId(),
+      id: id,
       text: text,
       date: date,
       completed: false

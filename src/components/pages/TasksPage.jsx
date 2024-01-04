@@ -40,7 +40,7 @@ export function TasksPage() {
         <div className='w-full pr-4'>
           {loading && <LoadingTasks />}
           {error && <ErrorLoading />}
-          {filteredArray.length === 0 && <InformativeBox />}
+          {filteredArray.length === 0 && <InformativeBox item={'tasks'} time={'yet. '}/>}
         </div>
 
         <div className='w-full flex flex-col md:flex-row'>

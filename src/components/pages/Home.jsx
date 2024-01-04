@@ -21,6 +21,7 @@ export function Home() {
   });
 
   const addProject = (taskId, projectId) => {
+    removeTaskFromProject(taskId);
     addTaskToProject(projectId, taskId);
     notifyEventListeners();
   }

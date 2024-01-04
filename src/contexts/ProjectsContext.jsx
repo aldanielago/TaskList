@@ -35,7 +35,7 @@ function ProjectProvider({ children }) {
 
   // Delete a project by id
   function deleteProject(idProject) {
-    setProjects(projects.filter( p => p.id !== idProject ));
+    setProjects(projects.filter( p => p.id != idProject ));
   }
 
   function changeNameProject(idProject, newName) {
@@ -67,19 +67,19 @@ function ProjectProvider({ children }) {
     setProjects(newProjects);
   }
 
-  function addTaskToProject(idProject, task) {
-    removeTaskFromProject(task);
+  function addTaskToProject(projectId, taskId) {
+    removeTaskFromProject(taskId);
     const newProjects = projects.map((p) => {
-      if (p.id === idProject) {
+      if (p.id === projectId) {
         if (p.tasks === undefined) {
           return {
             ...p,
-            tasks: [task]
+            tasks: [taskId]
           };
         } else {
           return {
             ...p,
-            tasks: [...p.tasks, task]
+            tasks: [...p.tasks, taskId]
           };
         }
       } else {
@@ -91,8 +91,8 @@ function ProjectProvider({ children }) {
 
   function removeTaskFromProject(taskId) {
     const newProjects = projects.map((p) => {
-      if (p.tasks !== undefined) {
-        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject !== taskId);
+      if (p.tasks != undefined) {
+        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject != taskId);
         return {
           ...p,
           tasks: newTasks
@@ -113,9 +113,9 @@ function ProjectProvider({ children }) {
       createProject,
       deleteProject,
       addTaskToProject,
-      removeTaskFromProject,
       changeNameProject,
       changePalleteProject,
+      removeTaskFromProject,
     }}>
       {children}
     </ProjectContext.Provider>

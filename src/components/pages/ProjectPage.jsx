@@ -2,10 +2,10 @@ import { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TodoItem } from '../elements/TodoItem';
 import { TaskContext } from '../../contexts/TaskContext';
-import { InformativeBox } from '../elements/InformativeBox';
 import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
 import { ProjectContext } from '../../contexts/ProjectsContext';
 import { TextInput } from '../elements/TextInput';
+import { AddTask } from '../elements/AddTask';
 
 export function ProjectPage() {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ export function ProjectPage() {
   const message = generateMessage(filteredTasks);
 
   const [ editName, setEditName ] = useState(false);
-  const [ projectName, setProjectName ] = useState(project.name);
   const [ editPallete, setEditPallete ] = useState(false);
+  const [ projectName, setProjectName ] = useState(project.name);
 
   const deleteATask = (taskId) => {
     deleteTask(taskId);
@@ -63,10 +63,11 @@ export function ProjectPage() {
           }
         </div>
         { message }
-        { filteredTasks.length == 0 && <InformativeBox item="tasks yet."/>}
+        <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
+        { filteredTasks.length == 0 && (<p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p>)}
+        <AddTask projectId={project.id}/>
         { filteredTasks.length > 0 && <>
-          <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
-          <div className="flex items-center flex-col w-full">
+          <div className=" w-full">
             {filteredTasks.map(task => (
             <TodoItem
               key={task.id}

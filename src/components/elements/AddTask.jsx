@@ -1,14 +1,17 @@
+import { TextInput } from "./TextInput";
 import { useContext, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import { TaskContext } from "../../contexts/TaskContext";
 import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
-import { TextInput } from "./TextInput";
+import { ProjectContext } from "../../contexts/ProjectsContext";
 
-function AddTask() {
-  const [ inputName, setInputName ] = useState('');
-  const [ date, setDate ] = useState('')
+function AddTask({ projectId }) {
   const { addTask } = useContext(TaskContext);
+  const { addTaskToProject } = useContext(ProjectContext);
+
+  const [ date, setDate ] = useState('')
+  const [ inputName, setInputName ] = useState('');
 
   const notify = () => {
       toast('Type the task name', {
@@ -21,6 +24,11 @@ function AddTask() {
       progress: undefined,
       progressClassName: "primary-blue"
     });
+  }
+
+  // Function to generate ids
+  function generateUniqueId() {
+    return Date.now(); // It uses the timestamp as id
   }
 
   function getCurrentLocalDate() {
@@ -36,8 +44,10 @@ function AddTask() {
     if (inputName === '') {
       notify();
     } else {
+      const taskId = generateUniqueId()
       const rawDate = date || getCurrentLocalDate();
-      addTask(inputName, rawDate);
+      addTask(taskId, inputName, rawDate);
+      projectId && addTaskToProject(projectId, taskId);
       setInputName('');
       setDate('');
     }

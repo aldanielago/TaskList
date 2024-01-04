@@ -35,9 +35,9 @@ function useLocalStorage(itemName, initialState){
 
   return {
     item,
-    updateInfo,
+    error,
     loading,
-    error
+    updateInfo,
   };
 }
 

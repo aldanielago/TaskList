@@ -35,8 +35,8 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
           {task.completed ? <BsCheckCircle size={30} className='text-green-600'/> : <BsCheckCircle size={30} className="text-zinc-400"/>}
         </button>
         <div className="flex flex-col w-full">
-          { editName ?
-            <TextInput item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'}/>
+          { editName
+            ? <TextInput item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'}/>
             : <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`} onClick={() => setEditName(true)}>{ name }</span>
           }
           <div className='flex'>
