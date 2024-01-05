@@ -11,15 +11,17 @@ export function ProjectPage() {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject } = useContext(ProjectContext);
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription } = useContext(ProjectContext);
 
   const project = projects.find(project => project.id == projectId);
   const filteredTasks = tasks.filter(task => project.tasks.includes(task.id)) || [];
   const message = generateMessage(filteredTasks);
 
   const [ editName, setEditName ] = useState(false);
-  const [ editPallete, setEditPallete ] = useState(false);
   const [ projectName, setProjectName ] = useState(project.name);
+  const [ editDescription, setEditDescription ] = useState(false);
+  const [ projectDescription, setProjectDescription ] = useState(project.description || '');
+  const [ editPallete, setEditPallete ] = useState(false);
 
   const deleteATask = (taskId) => {
     deleteTask(taskId);
@@ -62,9 +64,11 @@ export function ProjectPage() {
             : <TextInput item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject}/>
           }
         </div>
-        { message }
+        { !editDescription
+            ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
+            : <TextInput item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/> }
         <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
-        { filteredTasks.length == 0 && (<p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p>)}
+        { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : message }
         <AddTask projectId={project.id}/>
         { filteredTasks.length > 0 && <>
           <div className=" w-full">

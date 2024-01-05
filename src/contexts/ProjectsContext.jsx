@@ -21,12 +21,13 @@ function ProjectProvider({ children }) {
   }
 
   // Add a project
-  function createProject(name, palleteId) {
+  function createProject(name, palleteId, description) {
     const newProject = {
       id: generateUniqueId(),
       name: name,
       primaryColor: projectsPallete[palleteId].primaryColor,
       secondaryColor: projectsPallete[palleteId].secondaryColor,
+      description: description,
       tasks: []
     };
 
@@ -34,13 +35,13 @@ function ProjectProvider({ children }) {
   }
 
   // Delete a project by id
-  function deleteProject(idProject) {
-    setProjects(projects.filter( p => p.id != idProject ));
+  function deleteProject(projectId) {
+    setProjects(projects.filter( p => p.id != projectId ));
   }
 
-  function changeNameProject(idProject, newName) {
+  function changeNameProject(projectId, newName) {
     const newProjects = projects.map((p) => {
-      if (p.id === idProject) {
+      if (p.id === projectId) {
         return {
           ...p,
           name: newName
@@ -52,9 +53,9 @@ function ProjectProvider({ children }) {
     setProjects(newProjects);
   }
 
-  function changePalleteProject(idProject, idPallete) {
+  function changePalleteProject(projectId, idPallete) {
     const newProjects = projects.map((p) => {
-      if (p.id === idProject) {
+      if (p.id === projectId) {
         return {
           ...p,
           primaryColor: projectsPallete[idPallete].primaryColor,
@@ -67,9 +68,23 @@ function ProjectProvider({ children }) {
     setProjects(newProjects);
   }
 
+  function changeProjectDescription(projectId, newDescription) {
+    const newProjects = projects.map((p) => {
+      if (p.id === projectId) {
+        return {
+          ...p,
+          description: newDescription
+        };
+      } else {
+        return p;
+      }
+    });
+    setProjects(newProjects);
+  }
+
   function addTaskToProject(projectId, taskId) {
     removeTaskFromProject(taskId);
-    const newProjects = projects.map((p) => {
+    setProjects(projects.map((p) => {
       if (p.id === projectId) {
         if (p.tasks === undefined) {
           return {
@@ -85,13 +100,12 @@ function ProjectProvider({ children }) {
       } else {
         return p;
       }
-    });
-    setProjects(newProjects);
+    }));
   }
 
   function removeTaskFromProject(taskId) {
-    const newProjects = projects.map((p) => {
-      if (p.tasks != undefined) {
+    setProjects(projects.map((p) => {
+      if (p.tasks != undefined && p.tasks.includes(taskId)) {
         const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject != taskId);
         return {
           ...p,
@@ -100,8 +114,7 @@ function ProjectProvider({ children }) {
       } else {
         return p;
       }
-    });
-    setProjects(newProjects);
+    }));
   }
 
   return (
@@ -116,6 +129,7 @@ function ProjectProvider({ children }) {
       changeNameProject,
       changePalleteProject,
       removeTaskFromProject,
+      changeProjectDescription,
     }}>
       {children}
     </ProjectContext.Provider>

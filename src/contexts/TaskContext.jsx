@@ -28,9 +28,9 @@ function TaskProvider({ children }) {
   }
 
   // Function to set the completed state
-  function completeTask(idTask) {
+  function completeTask(taskId) {
     setTasks(tasks.map(t => {
-      if(t.id === idTask){
+      if(t.id === taskId){
         return {
           ...t,
           completed: !t.completed
@@ -42,13 +42,13 @@ function TaskProvider({ children }) {
   }
 
   // Function to delete a task
-  function deleteTask(idTask){
-    setTasks(tasks.filter( t => t.id !== idTask ))
+  function deleteTask(taskId){
+    setTasks(tasks.filter( t => t.id !== taskId ))
   }
 
-  function editTextTask(idTask, newText) {
+  function editTextTask(taskId, newText) {
     setTasks(tasks.map(t => {
-      if(t.id === idTask){
+      if(t.id === taskId){
         return {
           ...t,
           text: newText

@@ -3,7 +3,7 @@ import { ProjectContext } from '../../contexts/ProjectsContext';
 import { useState, useRef, useEffect, useContext } from 'react';
 
 export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
-  const { projects, removeTaskFromProject } = useContext(ProjectContext);
+  const { projects } = useContext(ProjectContext);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ toAddProject, setToAddProject] = useState(false);
   const menuRef = useRef(null);
@@ -23,7 +23,6 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   };
 
   const addProject = (p) => {
-    removeTaskFromProject(item.id);
     onAddProject(item.id, p.id);
     setToAddProject(false);
   };

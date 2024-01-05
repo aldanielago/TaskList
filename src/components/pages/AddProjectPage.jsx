@@ -25,6 +25,7 @@ export function AddProjectPage() {
   const [ project, setProject ] = useState({
     name: '',
     color: '0',
+    description: '',
   });
 
   function handleChange(e) {
@@ -39,10 +40,11 @@ export function AddProjectPage() {
       notify();
       return;
     } else {
-      createProject(project.name, project.color);
+      createProject(project.name, project.color, project.description);
       setProject({
         name: '',
         color: '',
+        description: ''
       });
       navigate('/');
     }
@@ -53,11 +55,11 @@ export function AddProjectPage() {
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <h1 className="font-Quicksand font-bold text-xl pl-4 pt-12">Add a project</h1>
       <form className="flex flex-col pl-4 pt-4">
-        <label className="flex flex-col gap-3">
+        <label className="flex flex-col gap-3 mb-4">
           <span className="font-Quicksand">Escribe el nombre del proyecto: </span>
           <input className="font-Quicksand border border-light-blue rounded-md p-2" type="text" name="name" onChange={(e) => handleChange(e)}  placeholder="Project's name"/>
         </label>
-        <label className="flex flex-col">
+        <label className="flex flex-col gap-3 mb-4">
           <span className="font-Quicksand">Selecciona un color: </span>
           <div className="flex gap-3">
             { projectsPallete.map((p, index) => {
@@ -71,6 +73,10 @@ export function AddProjectPage() {
                 </label>
               )})}
           </div>
+        </label>
+        <label className="flex flex-col gap-3">
+          <span className="font-Quicksand">Add a description: </span>
+          <textarea onChange={(e) => handleChange(e)} className="p-4 font-Quicksand border rounded-lg border-light-blue" name="description" id="" cols="30" rows="10"></textarea>
         </label>
         <PrimaryButton text="Add project" onClick={handleAddProject}/>
       </form>
