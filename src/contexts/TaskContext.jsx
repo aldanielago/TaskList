@@ -149,6 +149,19 @@ function TaskProvider({ children }) {
     return result;
   }
 
+  function editDateTask(taskId, newDate) {
+    setTasks(tasks.map(t => {
+      if(t.id === taskId){
+        return {
+          ...t,
+          date: newDate
+        }
+      } else {
+        return t
+      }
+    }))
+  }
+
   // This function returns the tasks filtered by date
   function filterTasksByDate(tasks) {
     if(tasks == []) return null
@@ -168,6 +181,7 @@ function TaskProvider({ children }) {
       deleteTask,
       editTextTask,
       completeTask,
+      editDateTask,
       useTaskContext,
       generateMessage,
       generateUniqueId,
