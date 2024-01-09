@@ -9,10 +9,10 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
   const { generateFormatDate, editTextTask } = useContext(TaskContext);
   const { projects } = useContext(ProjectContext);
 
+  const [ name, setName ] = useState(task.text);
+  const [ editName, setEditName ] = useState(false);
   const [ isCompleted, setIsCompleted ] = useState(false);
   const [ textDecoration, setTextDecoration ] = useState('no-underline');
-  const [ editName, setEditName ] = useState(false);
-  const [ name, setName ] = useState(task.text);
 
   const friendlyDate = generateFormatDate(task.date);
   const projectTask = projects.find(p => p.tasks.includes(task.id));

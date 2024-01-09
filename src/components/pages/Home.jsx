@@ -37,14 +37,14 @@ export function Home() {
   return (
     <section className="pl-4 pt-4">
       <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
-      { message }
+      <p className="text-xs font-Quicksand text-gray-font">{ message }</p>
       <section className="flex flex-col md:flex-row">
         <section className="pl-4 w-full flex flex-col items-center">
           <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Today&apos;s taks</h3>
           <AddTask/>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { sortedTasks.length === 0 && <InformativeBox item="tasks" time="for today"/>}
+          { !loading && sortedTasks.length === 0 && <InformativeBox item="tasks" time="for today"/>}
           { sortedTasks.map((task) => (
             <TodoItem
               key={task.id}
@@ -62,7 +62,7 @@ export function Home() {
           <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
-          { projects.length === 0 && <InformativeBox item="projects yet."/>}
+          { !loading && projects.length === 0 && <InformativeBox item="projects yet."/>}
           { projects.map((project) => (
             <Link to={`/projects/${project.id}`} key={project.id} className="w-full block self-center">
               <ProjectItem

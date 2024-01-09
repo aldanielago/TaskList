@@ -7,7 +7,7 @@ import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
 function AddTask({ projectId }) {
-  const { addTask } = useContext(TaskContext);
+  const { addTask, generateUniqueId, getCurrentLocalDate } = useContext(TaskContext);
   const { addTaskToProject } = useContext(ProjectContext);
 
   const [ date, setDate ] = useState('')
@@ -24,19 +24,6 @@ function AddTask({ projectId }) {
       progress: undefined,
       progressClassName: "primary-blue"
     });
-  }
-
-  // Function to generate ids
-  function generateUniqueId() {
-    return Date.now(); // It uses the timestamp as id
-  }
-
-  function getCurrentLocalDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
   }
 
   // In case the user doesn't type the task name, a toast will be shown

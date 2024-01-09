@@ -47,29 +47,35 @@ export function ProjectPage() {
           >Change color
         </button>
       </div>
-      { editPallete && <div className="w-40 origin-top absolute right-4 top-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-        {projectsPallete.map( p =>
-          <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
-            key={p.pallete}
-            value={p.pallete}
-            onClick={() => {handleChangePallete(p.pallete)}}
-          >{p.name}
-          </button>)}
-      </div>}
+
+      { editPallete &&
+        <div className="w-40 origin-top absolute right-4 top-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          {projectsPallete.map( p =>
+            <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
+              key={p.pallete}
+              value={p.pallete}
+              onClick={() => {handleChangePallete(p.pallete)}}
+            >{p.name}
+            </button>)}
+        </div>
+      }
       <div className="px-4 max-w-7xl grid w-full items-start">
         <div className="flex items-center mt-6 gap-2">
           <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
           { !editName
-            ? <h1 className="font-bold inline tracking-wide font-Quicksand mb-2 text-lg" onClick={() => setEditName(true)}>{ projectName }</h1>
+            ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName }</h1>
             : <TextInput item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject}/>
           }
         </div>
         { !editDescription
             ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
-            : <TextInput item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/> }
+            : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/> 
+        }
+
         <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
         { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : message }
         <AddTask projectId={project.id}/>
+
         { filteredTasks.length > 0 && <>
           <div className=" w-full">
             {filteredTasks.map(task => (

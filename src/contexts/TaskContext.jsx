@@ -15,6 +15,19 @@ function TaskProvider({ children }) {
     eventListeners.forEach((listener) => listener());
   };
 
+  // Function to generate ids
+  function generateUniqueId() {
+    return Date.now(); // It uses the timestamp as id
+  }
+
+  function getCurrentLocalDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   // Function to add a task at the end.
   function addTask(id, text, date ) {
     const newTask = {
@@ -65,18 +78,18 @@ function TaskProvider({ children }) {
     const completedTasks = tasks.filter( task => task.completed ).length;
     if(completedTasks == tasks.length && tasks.length == 0){
       return (
-        <p className="text-xs font-Quicksand text-gray-font"> No tasks, you can rest for today 😎</p>
+        <span> No tasks, you can rest for today 😎</span>
       )
     } if (completedTasks == tasks.length && tasks.length != 0) {
       return (
-        <p className="text-xs font-Quicksand text-gray-font"> You have done everything for today! Keep going 😉 </p>
+        <span> You have done everything for today! Keep going 😉 </span>
       )
     } else {
       return (
-        <p className="text-xs font-Quicksand text-gray-font">You have finished
+        <span>You have finished
           <span className="font-bold ml-1">{completedTasks}</span> of
           <span className="font-bold ml-1">{tasks.length}</span> tasks.
-        </p>
+        </span>
       )
     }
   }
@@ -136,45 +149,12 @@ function TaskProvider({ children }) {
     return result;
   }
 
-  // This function returns the tasks filtered by date, it returns an array of objects with the task and the color class
+  // This function returns the tasks filtered by date
   function filterTasksByDate(tasks) {
-    console.log('Tasks: ',tasks);
     if(tasks == []) return null
     const filteredTasks = tasks.map(task => {
       const formattedDate = generateFormatDate(task.date);
-      let colorClass = '';
-
-      switch (formattedDate) {
-        case 'today':
-          colorClass = 'bg-red-500'; // Today
-          break;
-        case 'yesterday':
-          colorClass = 'bg-orange-500'; // Yesterday
-          break;
-        case 'tomorrow':
-          colorClass = 'bg-blue-500'; // Tomorrow
-          break;
-        case 'last month':
-          colorClass = 'bg-pink-500'; // Last month
-          break;
-        case 'next month':
-          colorClass = 'bg-red-500'; // Next month
-          break;
-        default:
-          if (formattedDate.includes('days ago')) {
-            colorClass = 'bg-yellow-500'; // Past week
-          } else if (formattedDate.includes('weeks ago')) {
-            colorClass = 'bg-purple-500'; // Past month
-          } else if (formattedDate.includes('in ') && formattedDate.includes(' days')) {
-            colorClass = 'bg-green-500'; // This week
-          } else if (formattedDate.includes('in ') && formattedDate.includes(' weeks')) {
-            colorClass = 'bg-mint-500'; // This month
-          } else {
-            colorClass = 'bg-gray-500'; // Other
-          }
-          break;
-      }
-      return { ...task, formattedDate, colorClass };
+      return { ...task, formattedDate };
     });
     return filteredTasks;
   }
@@ -190,9 +170,11 @@ function TaskProvider({ children }) {
       completeTask,
       useTaskContext,
       generateMessage,
+      generateUniqueId,
       filterTasksByDate,
       subscribeToEvents,
       generateFormatDate,
+      getCurrentLocalDate,
       notifyEventListeners,
     }}>
       { children }
