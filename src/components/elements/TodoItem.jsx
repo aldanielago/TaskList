@@ -5,7 +5,7 @@ import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
 import { ProjectContext } from '../../contexts/ProjectsContext';
 import { TextInput } from '../elements/TextInput';
 
-function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true }) {
+function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, showProject = true }) {
   const { generateFormatDate, editTextTask, editDateTask } = useContext(TaskContext);
   const { projects } = useContext(ProjectContext);
 
@@ -31,7 +31,7 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
   };
 
   return (
-    <div className="bg-secondary-light max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
+    <section className="bg-secondary-light max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
       <div className='flex gap-4 w-full'>
         <button className="bg-unset cursor-pointer" onClick={handleButtonClick}>
           { task.completed
@@ -47,16 +47,16 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true })
           <div className='flex'>
             { (showDate && editDate)
               ? <TextInput item={task} value={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
-              : <span className={`text-xs font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`} onClick={() => setEditDate(true)}>{ friendlyDate }</span>
+              : <span className={`text-xs font-Quicksand transition-all duration-200 ease-in-out`} onClick={() => setEditDate(true)}>{ friendlyDate }</span>
             }
 
             { (showDate && projectTask) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
-            { projectTask && <span className="text-xs inline-block font-Quicksand text-gray-font">{ projectTask.name }</span>}
+            { (showProject && projectTask)  && <span className="text-xs inline-block font-Quicksand text-gray-font">{ projectTask.name }</span>}
           </div>
         </div>
       </div>
       <SmallOptionsMenu item={task} onDelete={onDelete} onAddProject={onAddProject}/>
-    </div>
+    </section>
   );
 
 }

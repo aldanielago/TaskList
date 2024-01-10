@@ -40,6 +40,7 @@ function ProjectProvider({ children }) {
   }
 
   function changeNameProject(projectId, newName) {
+    newName == '' ? newName = 'New Project' : null;
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
         return {

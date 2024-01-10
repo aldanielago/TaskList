@@ -5,7 +5,7 @@ const TaskContext = createContext();
 
 function TaskProvider({ children }) {
   const { item: tasks, updateInfo: setTasks, loading, error } = useLocalStorage('TASKS_V1', []);
-  const [eventListeners, setEventListeners] = useState([]);
+  const [ eventListeners, setEventListeners ] = useState([]);
 
   const subscribeToEvents = (listener) => {
     setEventListeners((prevListeners) => [...prevListeners, listener]);
@@ -60,6 +60,7 @@ function TaskProvider({ children }) {
   }
 
   function editTextTask(taskId, newText) {
+    newText == '' ? newText = 'New Task' : null;
     setTasks(tasks.map(t => {
       if(t.id === taskId){
         return {

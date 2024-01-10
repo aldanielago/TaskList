@@ -1,7 +1,8 @@
 export function TextInput({ item, value, onChange, setEdit, mainFunction, text = 'small', placeholder, type = 'text' }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      item ? mainFunction(item.id, value) : mainFunction(value);
+      const finalValue = value.trim() !== '' ? value : 'Untitled';
+      item ? mainFunction(item.id, finalValue) : mainFunction(finalValue);
       setEdit && setEdit(false);
     } else if (e.key === 'Escape') {
       setEdit && setEdit(false);

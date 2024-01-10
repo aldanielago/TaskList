@@ -35,12 +35,14 @@ export function Home() {
   const message = generateMessage(tasks);
 
   return (
-    <section className="pl-4 pt-4">
-      <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
-      <p className="text-xs font-Quicksand text-gray-font">{ message }</p>
-      <section className="flex flex-col md:flex-row">
-        <section className="pl-4 w-full flex flex-col items-center">
-          <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Today&apos;s taks</h3>
+    <section className="w-full">
+      <div className="pl-4 pt-4">
+        <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
+        <p className="text-xs font-Quicksand text-gray-font">{ message }</p>
+      </div>
+      <section className="flex flex-col w-full">
+        <section className="w-full flex flex-col items-center mt-2">
+          <h3 className="pt-4 pl-4 font-Quicksand self-start text-sm font-semibold ">Today&apos;s taks</h3>
           <AddTask/>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
@@ -58,13 +60,13 @@ export function Home() {
             <PrimaryButton text="See more"/>
           </Link>
         </section>
-        <section className="pl-4 w-full flex flex-col items-center ">
-          <h3 className="pt-4 pl-4 font-Quicksand self-start mt-4 mb-2">Projects</h3>
+        <section className="w-full flex flex-col items-center">
+          <h3 className="pt-2 pl-4 font-Quicksand self-start text-sm font-semibold ">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
           { !loading && projects.length === 0 && <InformativeBox item="projects yet."/>}
           { projects.map((project) => (
-            <Link to={`/projects/${project.id}`} key={project.id} className="w-full block self-center">
+            <Link to={`/projects/${project.id}`} key={project.id} className="w-full flex justify-center">
               <ProjectItem
                 project={project}
               />

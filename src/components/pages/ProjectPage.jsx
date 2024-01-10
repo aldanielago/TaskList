@@ -64,16 +64,16 @@ export function ProjectPage() {
           <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
           { !editName
             ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName }</h1>
-            : <TextInput item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject}/>
+            : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject}/>
           }
         </div>
         { !editDescription
             ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
-            : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/> 
+            : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
         }
 
         <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
-        { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : message }
+        { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : <p className="font-Quicksand mt-2 text-sm">{ message }</p> }
         <AddTask projectId={project.id}/>
 
         { filteredTasks.length > 0 && <>
@@ -83,6 +83,7 @@ export function ProjectPage() {
               key={task.id}
               task={task}
               showDate={false}
+              showProject={false}
               onComplete={() => { completeTask(task.id) }}
               onDelete={() => { deleteATask(task.id) }}
               onAddProject={ addProject }

@@ -49,7 +49,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
       {isOpen && (
         <div ref={menuRef} className="origin-top absolute mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1">
-            { onAddProject && <button onClick={handleAddToProjectClick} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start" > Add to project </button>}
+            { (onAddProject && projects.length != 0) && <button onClick={handleAddToProjectClick} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start" > Add to project </button>}
             { onDelete && <button onClick={handleDeleteClick} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start" > Delete </button>}
           </div>
         </div>
