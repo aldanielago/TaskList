@@ -11,29 +11,16 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, s
 
   const [ name, setName ] = useState(task.text);
   const [ editName, setEditName ] = useState(false);
-  const [ isCompleted, setIsCompleted ] = useState(false);
-  const [ textDecoration, setTextDecoration ] = useState('no-underline');
   const [ editDate, setEditDate ] = useState(false);
   const [ date, setDate ] = useState(task.date);
 
   const friendlyDate = generateFormatDate(date);
   const projectTask = projects.find(p => p.tasks.includes(task.id));
 
-  const handleButtonClick = () => {
-    if (!isCompleted) {
-      setIsCompleted(true);
-      setTextDecoration('line-through');
-    } else {
-      setIsCompleted(false);
-      setTextDecoration('no-underline');
-    }
-    onComplete();
-  };
-
   return (
     <section className="bg-secondary-light max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
       <div className='flex gap-4 w-full'>
-        <button className="bg-unset cursor-pointer" onClick={handleButtonClick}>
+        <button className="bg-unset cursor-pointer" onClick={onComplete}>
           { task.completed
             ? <BsCheckCircle size={30} className='text-green-600'/>
             : <BsCheckCircle size={30} className="text-zinc-400"/>
@@ -42,7 +29,7 @@ function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, s
         <div className="flex flex-col w-full">
           { editName
             ? <TextInput item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'}/>
-            : <span className={`text-sm font-Quicksand ${textDecoration} transition-all duration-200 ease-in-out`} onClick={() => setEditName(true)}>{ name }</span>
+            : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} transition-all duration-200 ease-in-out`} onClick={() => setEditName(true)}>{ name }</span>
           }
           <div className='flex'>
             { (showDate && editDate)
