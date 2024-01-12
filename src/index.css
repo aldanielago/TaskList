@@ -19,5 +19,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 label input:checked + span {
-  @apply border-gray-400
+  @apply border-gray-600
 }

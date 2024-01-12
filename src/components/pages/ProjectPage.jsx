@@ -63,8 +63,8 @@ export function ProjectPage() {
         <div className="flex items-center mt-6 gap-2">
           <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
           { !editName
-            ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName }</h1>
-            : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject}/>
+            ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
+            : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
           }
         </div>
         { !editDescription

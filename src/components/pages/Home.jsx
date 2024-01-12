@@ -56,9 +56,6 @@ export function Home() {
               onAddProject={ addProject }
             />
           ))}
-          <Link to="/tasks">
-            <PrimaryButton text="See more"/>
-          </Link>
         </section>
         <section className="w-full flex flex-col items-center">
           <h3 className="pt-2 pl-4 font-Quicksand self-start text-sm font-semibold ">Projects</h3>
