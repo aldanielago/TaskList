@@ -35,7 +35,7 @@ export function Home() {
   const message = generateMessage(tasks);
 
   return (
-    <section className="w-full">
+    <section className="w-full h-screen overflow-y-auto">
       <div className="pl-4 pt-4">
         <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
         <p className="text-xs font-Quicksand text-gray-font">{ message }</p>
