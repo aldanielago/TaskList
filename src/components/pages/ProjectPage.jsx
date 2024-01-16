@@ -10,8 +10,8 @@ import { AddTask } from '../elements/AddTask';
 export function ProjectPage() {
   const navigate = useNavigate();
   const { projectId } = useParams();
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons } = useContext(ProjectContext);
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription } = useContext(ProjectContext);
 
   const project = projects.find(project => project.id == projectId);
   const filteredTasks = tasks.filter(task => project.tasks.includes(task.id)) || [];
@@ -40,8 +40,8 @@ export function ProjectPage() {
   }
 
   return (
-    <section className="w-full h-full flex flex-col items-center justify-center">
-      <div className={`${project.primaryColor} w-full h-28 relative`}>
+    <section className="w-full overflow-auto flex flex-col items-center justify-center">
+      <div className={`${project.primaryColor} w-full h-28 relative top-0`}>
         <button className={`p-2 rounded-md border ${project.primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
             onClick={() => setEditPallete(!editPallete)}
           >Change color
@@ -59,14 +59,16 @@ export function ProjectPage() {
             </button>)}
         </div>
       }
-      <div className="px-4 max-w-7xl grid w-full items-start">
+      <div className="px-4 max-w-7xl grid w-full items-start py-2">
         <div className="flex items-center mt-6 gap-2">
-          <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
+          <i className="text-2xl text-zinc-400">{ project.icon ? projectIcons[project.icon].component : projectIcons[0].component }</i>
           { !editName
             ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
             : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
           }
+          <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
         </div>
+
         { !editDescription
             ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
             : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
@@ -77,7 +79,7 @@ export function ProjectPage() {
         <AddTask projectId={project.id}/>
 
         { filteredTasks.length > 0 && <>
-          <div className=" w-full">
+          <div className=" w-full py-2">
             {filteredTasks.map(task => (
             <TodoItem
               key={task.id}

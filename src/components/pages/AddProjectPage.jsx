@@ -7,7 +7,7 @@ import { PrimaryButton } from "../buttons/PrimaryButton"
 import { ProjectContext } from "../../contexts/ProjectsContext"
 
 export function AddProjectPage() {
-  const { projectsPallete, createProject } = useContext(ProjectContext);
+  const { projectsPallete, createProject, projectIcons } = useContext(ProjectContext);
   const navigate = useNavigate();
 
   const notify = () => {
@@ -26,6 +26,7 @@ export function AddProjectPage() {
   const [ project, setProject ] = useState({
     name: '',
     color: '0',
+    icon: '0',
     description: '',
   });
 
@@ -41,10 +42,11 @@ export function AddProjectPage() {
       notify();
       return;
     } else {
-      createProject(project.name, project.color, project.description);
+      createProject(project.name, project.color, project.icon, project.description);
       setProject({
         name: '',
         color: '',
+        icon: '',
         description: ''
       });
       navigate('/');
@@ -52,7 +54,7 @@ export function AddProjectPage() {
   }
 
   return (
-    <section>
+    <section className="h-screen overflow-auto">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <h1 className="font-Quicksand font-bold text-xl pl-4 pt-12">Add a project</h1>
       <form className="flex flex-col pl-4 pt-4">
@@ -63,6 +65,19 @@ export function AddProjectPage() {
         <label className="flex flex-col gap-3 pb-4">
           <span className="font-Quicksand">Add a description</span>
           <TextInput placeholder={"Project's description"} onChange={handleChange} name={"description"}/>
+        </label>
+        <label className="flex flex-col gap-3 pb-4 max-w-[90%]">
+          <span className="font-Quicksand">Choose an icon: </span>
+          <div className="flex overflow-x-auto gap-3">
+            { projectIcons.map((icon, index) =>
+              <label key={index}>
+                <input type="radio" name="icon" value={index} className="hidden" onChange={(e) => handleChange(e)}/>
+                <span className="font-Quicksand flex border hover:cursor-pointer hover:primary-blue w-12 h-12 rounded-full justify-center items-center">
+                  <i className="text-2xl">{ icon.component }</i>
+                </span>
+              </label>
+            )}
+          </div>
         </label>
         <label className="flex flex-col gap-3 mb-4">
           <span className="font-Quicksand">Choose a color</span>

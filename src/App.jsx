@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="flex-grow">
+      <div className="flex-grow w-3/4">
         <Routes>
           <Route path="/" exact element={<TaskProvider><ProjectProvider><Home /></ProjectProvider></TaskProvider>} />
           <Route path="/add-project" element={<ProjectProvider><TaskProvider><AddProjectPage /></TaskProvider></ProjectProvider>} />

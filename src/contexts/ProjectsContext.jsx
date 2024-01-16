@@ -1,5 +1,9 @@
 import { createContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { BiAbacus, BiAlarm, BiArchive, BiAtom, BiBaguette, BiBarChartSquare, BiBarChartAlt2, BiBasket, BiBath, BiBell, BiBookBookmark, BiBookHeart, BiBot, BiBrain, BiBriefcaseAlt, BiBrush, BiBug, BiBuildings, BiBulb, BiCalculator, BiCalendarAlt, BiCamera, BiCameraMovie, BiCart, BiCodeBlock, BiCodeAlt, BiConfused, BiCookie, BiCool, BiCrown, BiCycling, BiData, BiDesktop, BiExtension, BiFolder, BiGame, BiGhost, BiGift, BiGitBranch, BiGitRepoForked, BiGlobe, BiHappy, BiHappyBeaming, BiLogoFacebook, BiLogoFigma, BiLogoGit, BiLogoGithub, BiLogoInstagram, BiLogoLinkedin, BiLogoPostgresql, BiLogoMicrosoftTeams, BiLogoVisualStudio, BiLogoWhatsapp, BiMessageRoundedEdit, BiMoneyWithdraw, BiMoviePlay, BiMusic, BiNote, BiPencil, BiSolidBalloon, BiSolidFlorist, BiSolidPlanet, BiStar, BiUpsideDown, BiWinkSmile, BiWinkTongue, BiWorld, BiWrench } from "react-icons/bi";
+import { GoMortarBoard } from "react-icons/go";
+import { HiFire, HiOutlineSparkles, HiOutlineTrophy } from "react-icons/hi2";
+import { SlGlobeAlt, SlEnergy, SlHeart } from "react-icons/sl";
 
 const ProjectContext = createContext();
 
@@ -15,21 +19,102 @@ function ProjectProvider({ children }) {
     { pallete: 5, name:'Purple', primaryColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
   ];
 
+  const projectIcons = [
+    { id: 34, component: <BiFolder/>},
+    { id: 0, component: <BiAbacus/> },
+    { id: 1, component: <BiAlarm/>},
+    { id: 2, component: <BiArchive/>},
+    { id: 3, component: <BiAtom/>},
+    { id: 4, component: <BiBaguette/>},
+    { id: 5, component: <BiBarChartSquare/>},
+    { id: 6, component: <BiBarChartAlt2/>},
+    { id: 7, component: <BiBasket/>},
+    { id: 8, component: <BiBath/>},
+    { id: 9, component: <BiBell/>},
+    { id: 10, component: <BiBookBookmark/>},
+    { id: 11, component: <BiBookHeart/>},
+    { id: 12, component: <BiBot/>},
+    { id: 13, component: <BiBrain/>},
+    { id: 14, component: <BiBriefcaseAlt/>},
+    { id: 15, component: <BiBrush/>},
+    { id: 16, component: <BiBug/>},
+    { id: 17, component: <BiBuildings/>},
+    { id: 18, component: <BiBulb/>},
+    { id: 19, component: <BiCalculator/>},
+    { id: 20, component: <BiCalendarAlt/>},
+    { id: 21, component: <BiCamera/>},
+    { id: 22, component: <BiCameraMovie/>},
+    { id: 23, component: <BiCart/>},
+    { id: 24, component: <BiCodeBlock/>},
+    { id: 25, component: <BiCodeAlt/>},
+    { id: 26, component: <BiConfused/>},
+    { id: 27, component: <BiCookie/>},
+    { id: 28, component: <BiCool/>},
+    { id: 29, component: <BiCrown/>},
+    { id: 30, component: <BiCycling/>},
+    { id: 31, component: <BiData/>},
+    { id: 32, component: <BiDesktop/>},
+    { id: 33, component: <BiExtension/>},
+    { id: 35, component: <BiGame/>},
+    { id: 36, component: <BiGhost/>},
+    { id: 37, component: <BiGift/>},
+    { id: 38, component: <BiGitBranch/>},
+    { id: 39, component: <BiGitRepoForked/>},
+    { id: 40, component: <BiGlobe/>},
+    { id: 41, component: <BiHappy/>},
+    { id: 42, component: <BiHappyBeaming/>},
+    { id: 43, component: <BiLogoFacebook/>},
+    { id: 44, component: <BiLogoFigma/>},
+    { id: 45, component: <BiLogoGit/>},
+    { id: 46, component: <BiLogoGithub/>},
+    { id: 47, component: <BiLogoInstagram/>},
+    { id: 48, component: <BiLogoLinkedin/>},
+    { id: 49, component: <BiLogoPostgresql/>},
+    { id: 50, component: <BiLogoMicrosoftTeams/>},
+    { id: 51, component: <BiLogoVisualStudio/>},
+    { id: 52, component: <BiLogoWhatsapp/>},
+    { id: 53, component: <BiMessageRoundedEdit/>},
+    { id: 54, component: <BiMoneyWithdraw/>},
+    { id: 55, component: <BiMoviePlay/>},
+    { id: 56, component: <BiMusic/>},
+    { id: 57, component: <BiNote/>},
+    { id: 58, component: <BiPencil/>},
+    { id: 59, component: <BiSolidBalloon/>},
+    { id: 60, component: <BiSolidFlorist/>},
+    { id: 61, component: <BiSolidPlanet/>},
+    { id: 62, component: <BiStar/>},
+    { id: 63, component: <BiUpsideDown/>},
+    { id: 64, component: <BiWinkSmile/>},
+    { id: 65, component: <BiWinkTongue/>},
+    { id: 66, component: <BiWorld/>},
+    { id: 67, component: <BiWrench/>},
+    { id: 68, component: <GoMortarBoard/>},
+    { id: 69, component: <HiFire/>},
+    { id: 70, component: <HiOutlineSparkles/>},
+    { id: 71, component: <HiOutlineTrophy/>},
+    { id: 72, component: <SlGlobeAlt/>},
+    { id: 73, component: <SlEnergy/>},
+    { id: 74, component: <SlHeart/>},
+  ]
+
   // Function to generate ids
   function generateUniqueId() {
     return Date.now(); // It uses the timestamp as id
   }
 
   // Add a project
-  function createProject(name, palleteId, description) {
+  function createProject(name, palleteId, iconId, description) {
     const newProject = {
       id: generateUniqueId(),
       name: name,
+      icon: iconId,
       primaryColor: projectsPallete[palleteId].primaryColor,
       secondaryColor: projectsPallete[palleteId].secondaryColor,
       description: description,
       tasks: []
     };
+
+    console.log(newProject);
 
     setProjects([...projects, newProject]);
   }
@@ -123,6 +208,7 @@ function ProjectProvider({ children }) {
       error,
       loading,
       projects,
+      projectIcons,
       projectsPallete,
       createProject,
       deleteProject,
