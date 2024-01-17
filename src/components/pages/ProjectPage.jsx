@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TodoItem } from '../elements/TodoItem';
 import { TaskContext } from '../../contexts/TaskContext';
@@ -23,6 +23,11 @@ export function ProjectPage() {
   const [ projectDescription, setProjectDescription ] = useState(project.description || '');
   const [ editPallete, setEditPallete ] = useState(false);
   const [ editIcon, setEditIcon ] = useState(false);
+
+  useEffect(() => {
+    setProjectName(project.name);
+    setProjectDescription(project.description);
+  }, [project]);
 
   const deleteATask = (taskId) => {
     deleteTask(taskId);

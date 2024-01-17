@@ -54,7 +54,7 @@ export function AddProjectPage() {
   }
 
   return (
-    <section className="h-screen overflow-auto">
+    <section className="h-screen overflow-auto pl-6">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <h1 className="font-Quicksand font-bold text-xl pl-4 pt-12">Add a project</h1>
       <form className="flex flex-col pl-4 pt-4">
@@ -79,9 +79,9 @@ export function AddProjectPage() {
             )}
           </div>
         </label>
-        <label className="flex flex-col gap-3 mb-4">
+        <label className="flex flex-col gap-3 mb-4 max-w-[90%]">
           <span className="font-Quicksand">Choose a color</span>
-          <div className="flex gap-3">
+          <div className="flex gap-3 overflow-x-auto pr-2">
             { projectsPallete.map((p, index) =>
                 <label key={index}>
                   <input type="radio" name="color" value={p.pallete} className="hidden" onChange={(e) => handleChange(e)}/>

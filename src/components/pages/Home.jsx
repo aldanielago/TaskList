@@ -35,13 +35,13 @@ export function Home() {
   const message = generateMessage(tasks);
 
   return (
-    <section className="w-full h-screen overflow-y-auto">
+    <section className="w-full h-screen overflow-y-auto pl-6">
       <div className="pl-4 pt-4">
         <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
         <p className="text-xs font-Quicksand text-gray-font">{ message }</p>
       </div>
-      <section className="flex flex-col w-full">
-        <section className="w-full flex flex-col items-center mt-2">
+      <section className="flex flex-col w-full md:flex-col-reverse">
+        <section className="w-full flex flex-col items-center mt-2 pb-8 md:items-start">
           <h3 className="pt-4 pl-4 font-Quicksand self-start text-sm font-semibold ">Today&apos;s taks</h3>
           <AddTask/>
           { loading && <LoadingTasks/>}
@@ -57,19 +57,21 @@ export function Home() {
             />
           ))}
         </section>
-        <section className="w-full flex flex-col items-center">
-          <h3 className="pt-2 pl-4 font-Quicksand self-start text-sm font-semibold ">Projects</h3>
+        <section className="w-full flex flex-col items-center pb-4">
+          <h3 className="pt-2 pl-4 font-Quicksand self-start text-sm font-semibold">Projects</h3>
           { loading && <LoadingTasks/>}
           { error && <ErrorLoading/>}
           { !loading && projects.length === 0 && <InformativeBox item="projects yet."/>}
-          { projects.map((project) => (
-            <Link to={`/projects/${project.id}`} key={project.id} className="w-full flex justify-center">
-              <ProjectItem
-                project={project}
-              />
-            </Link>
-          ))}
-          <Link to="/add-project">
+          <section className="flex flex-col w-full md:flex-row overflow-x-auto pb-2 md:gap-4">
+            { projects.map((project) => (
+              <Link to={`/projects/${project.id}`} key={project.id} className="w-full flex justify-center">
+                <ProjectItem
+                  project={project}
+                />
+              </Link>
+            ))}
+          </section>
+          <Link to="/add-project" className="md:hidden">
             <PrimaryButton text="Add a project"/>
           </Link>
         </section>

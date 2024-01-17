@@ -22,3 +22,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 label input:checked + span {
   @apply border-gray-600
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
