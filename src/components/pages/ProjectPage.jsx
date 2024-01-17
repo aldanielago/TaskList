@@ -10,7 +10,7 @@ import { AddTask } from '../elements/AddTask';
 export function ProjectPage() {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons } = useContext(ProjectContext);
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
 
   const project = projects.find(project => project.id == projectId);
@@ -18,10 +18,11 @@ export function ProjectPage() {
   const message = generateMessage(filteredTasks);
 
   const [ editName, setEditName ] = useState(false);
-  const [ projectName, setProjectName ] = useState(project.name);
+  const [ projectName, setProjectName ] = useState(project.name || 'Untitled project');
   const [ editDescription, setEditDescription ] = useState(false);
   const [ projectDescription, setProjectDescription ] = useState(project.description || '');
   const [ editPallete, setEditPallete ] = useState(false);
+  const [ editIcon, setEditIcon ] = useState(false);
 
   const deleteATask = (taskId) => {
     deleteTask(taskId);
@@ -40,60 +41,73 @@ export function ProjectPage() {
   }
 
   return (
-    <section className="w-full overflow-auto flex flex-col items-center justify-center">
-      <div className={`${project.primaryColor} w-full h-28 relative top-0`}>
+    <section className="w-full overflow-y-auto flex flex-col items-center justify-center">
+      <div className={`${project.primaryColor} w-full h-32 relative top-0`}>
         <button className={`p-2 rounded-md border ${project.primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
             onClick={() => setEditPallete(!editPallete)}
           >Change color
         </button>
       </div>
 
-      { editPallete &&
-        <div className="w-40 origin-top absolute right-4 top-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          {projectsPallete.map( p =>
-            <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
-              key={p.pallete}
-              value={p.pallete}
-              onClick={() => {handleChangePallete(p.pallete)}}
-            >{p.name}
-            </button>)}
-        </div>
-      }
-      <div className="px-4 max-w-7xl grid w-full items-start py-2">
-        <div className="flex items-center mt-6 gap-2">
-          <i className="text-2xl text-zinc-400">{ project.icon ? projectIcons[project.icon].component : projectIcons[0].component }</i>
-          { !editName
-            ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
-            : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
-          }
-          <SmallOptionsMenu item={ project } onDelete={onDeleteProject}/>
-        </div>
-
-        { !editDescription
-            ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
-            : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
-        }
-
-        <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
-        { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : <p className="font-Quicksand mt-2 text-sm">{ message }</p> }
-        <AddTask projectId={project.id}/>
-
-        { filteredTasks.length > 0 && <>
-          <div className=" w-full py-2">
-            {filteredTasks.map(task => (
-            <TodoItem
-              key={task.id}
-              task={task}
-              showDate={false}
-              showProject={false}
-              onComplete={() => { completeTask(task.id) }}
-              onDelete={() => { deleteATask(task.id) }}
-              onAddProject={ addProject }
-            />
-          ))}
+      <section className="w-full pl-6">
+        { editPallete &&
+          <div className="w-40 origin-top absolute right-4 top-[7rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            {projectsPallete.map( p =>
+              <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
+                key={p.pallete}
+                value={p.pallete}
+                onClick={() => {handleChangePallete(p.pallete)}}
+              >{p.name}
+              </button>)}
           </div>
-        </>}
-      </div>
+        }
+        <div className="px-4 max-w-7xl grid w-full items-start py-2 ">
+          <div className="flex items-center mt-6 gap-2 mb-2">
+            <i className="text-3xl text-zinc-400 cursor-pointer" onClick={() => setEditIcon(true)}>{ project.icon ? projectIcons[project.icon].component : projectIcons[0].component }</i>
+            { editIcon &&
+              <div className="w-40 h-40 overflow-x-auto flex flex-wrap origin-top top-48 absolute rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                {projectIcons.map( (icon) =>
+                  <button className={`block px-4 py-2 text-base text-gray-700 hover:cursor-pointer`}
+                    key={icon.id}
+                    value={icon.id}
+                    onClick={() => {setEditIcon(false); changeProjectIcon(project.id, icon.id)}}
+                  >{icon.component}
+                  </button>)}
+              </div>
+            }
+            { !editName
+              ? <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
+              : <TextInput text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
+            }
+            { !editName && <SmallOptionsMenu onDelete={onDeleteProject} /> }
+          </div>
+
+          { !editDescription
+              ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
+              : <TextInput placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
+          }
+
+          <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>
+          { filteredTasks.length == 0 ? <p className="font-Quicksand mt-2 text-sm">Add your first task for this project!</p> : <p className="font-Quicksand mt-2 text-sm">{ message }</p> }
+          <AddTask projectId={project.id}/>
+
+          { filteredTasks.length > 0 && <>
+            <div className=" w-full py-2">
+              {filteredTasks.map(task => (
+              <TodoItem
+                key={task.id}
+                task={task}
+                showDate={false}
+                showProject={false}
+                onComplete={() => { completeTask(task.id) }}
+                onDelete={() => { deleteATask(task.id) }}
+                onAddProject={ addProject }
+              />
+            ))}
+            </div>
+          </>}
+        </div>
+      </section>
     </section>
   )
 }

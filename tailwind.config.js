@@ -26,14 +26,15 @@ export default {
         'back-dark': '#1e1e1e',
       },
       fontFamily: {
-        'Quicksand': 'Quicksand' || 'sans-serif'
+        'Quicksand': 'Quicksand' || 'sans-serif',
+        'Albert': 'Albert Sans' || 'sans-serif',
       }
     },
   },
   plugins: [
     // eslint-disable-next-line no-undef
     require('@tailwindcss/forms')({
-      strategy: 'class', // only generate global styles
+      strategy: 'class',
     })
   ],
 }

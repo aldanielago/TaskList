@@ -10,8 +10,8 @@ import { SideBar } from "./components/elements/SideBar"
 function App() {
   return (
     <div className="flex">
-      <SideBar />
-      <div className="flex-grow w-3/4">
+      <ProjectProvider><SideBar /></ProjectProvider>
+      <div className="flex-grow w-2/3">
         <Routes>
           <Route path="/" exact element={<TaskProvider><ProjectProvider><Home /></ProjectProvider></TaskProvider>} />
           <Route path="/add-project" element={<ProjectProvider><TaskProvider><AddProjectPage /></TaskProvider></ProjectProvider>} />

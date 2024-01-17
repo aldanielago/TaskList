@@ -20,7 +20,6 @@ function ProjectProvider({ children }) {
   ];
 
   const projectIcons = [
-    { id: 34, component: <BiFolder/>},
     { id: 0, component: <BiAbacus/> },
     { id: 1, component: <BiAlarm/>},
     { id: 2, component: <BiArchive/>},
@@ -55,6 +54,7 @@ function ProjectProvider({ children }) {
     { id: 31, component: <BiData/>},
     { id: 32, component: <BiDesktop/>},
     { id: 33, component: <BiExtension/>},
+    { id: 34, component: <BiFolder/>},
     { id: 35, component: <BiGame/>},
     { id: 36, component: <BiGhost/>},
     { id: 37, component: <BiGift/>},
@@ -122,6 +122,20 @@ function ProjectProvider({ children }) {
   // Delete a project by id
   function deleteProject(projectId) {
     setProjects(projects.filter( p => p.id != projectId ));
+  }
+
+  function changeProjectIcon(projectId, iconId) {
+    const newProjects = projects.map((p) => {
+      if (p.id === projectId) {
+        return {
+          ...p,
+          icon: iconId
+        };
+      } else {
+        return p;
+      }
+    });
+    setProjects(newProjects);
   }
 
   function changeNameProject(projectId, newName) {
@@ -213,6 +227,7 @@ function ProjectProvider({ children }) {
       createProject,
       deleteProject,
       addTaskToProject,
+      changeProjectIcon,
       changeNameProject,
       changePalleteProject,
       removeTaskFromProject,
