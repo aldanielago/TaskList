@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { BiAbacus, BiAlarm, BiArchive, BiAtom, BiBaguette, BiBarChartSquare, BiBarChartAlt2, BiBasket, BiBath, BiBell, BiBookBookmark, BiBookHeart, BiBot, BiBrain, BiBriefcaseAlt, BiBrush, BiBug, BiBuildings, BiBulb, BiCalculator, BiCalendarAlt, BiCamera, BiCameraMovie, BiCart, BiCodeBlock, BiCodeAlt, BiConfused, BiCookie, BiCool, BiCrown, BiCycling, BiData, BiDesktop, BiExtension, BiFolder, BiGame, BiGhost, BiGift, BiGitBranch, BiGitRepoForked, BiGlobe, BiHappy, BiHappyBeaming, BiLogoFacebook, BiLogoFigma, BiLogoGit, BiLogoGithub, BiLogoInstagram, BiLogoLinkedin, BiLogoPostgresql, BiLogoMicrosoftTeams, BiLogoVisualStudio, BiLogoWhatsapp, BiMessageRoundedEdit, BiMoneyWithdraw, BiMoviePlay, BiMusic, BiNote, BiPencil, BiSolidBalloon, BiSolidFlorist, BiSolidPlanet, BiStar, BiUpsideDown, BiWinkSmile, BiWinkTongue, BiWorld, BiWrench } from "react-icons/bi";
 import { GoMortarBoard } from "react-icons/go";
-import { HiFire, HiOutlineSparkles, HiOutlineTrophy } from "react-icons/hi2";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { SlGlobeAlt, SlEnergy, SlHeart } from "react-icons/sl";
+import { HiFire, HiOutlineSparkles, HiOutlineTrophy } from "react-icons/hi2";
+import { BiAbacus, BiAlarm, BiArchive, BiAtom, BiBaguette, BiBarChartSquare, BiBarChartAlt2, BiBasket, BiBath, BiBell, BiBookBookmark, BiBookHeart, BiBot, BiBrain, BiBriefcaseAlt, BiBrush, BiBug, BiBuildings, BiBulb, BiCalculator, BiCalendarAlt, BiCamera, BiCameraMovie, BiCart, BiCodeBlock, BiCodeAlt, BiConfused, BiCookie, BiCool, BiCrown, BiCycling, BiData, BiDesktop, BiExtension, BiFolder, BiGame, BiGhost, BiGift, BiGitBranch, BiGitRepoForked, BiGlobe, BiHappy, BiHappyBeaming, BiLogoFacebook, BiLogoFigma, BiLogoGit, BiLogoGithub, BiLogoInstagram, BiLogoLinkedin, BiLogoPostgresql, BiLogoMicrosoftTeams, BiLogoVisualStudio, BiLogoWhatsapp, BiMessageRoundedEdit, BiMoneyWithdraw, BiMoviePlay, BiMusic, BiNote, BiPencil, BiSolidBalloon, BiSolidFlorist, BiSolidPlanet, BiStar, BiUpsideDown, BiWinkSmile, BiWinkTongue, BiWorld, BiWrench } from "react-icons/bi";
 
 const ProjectContext = createContext();
 
@@ -97,12 +97,10 @@ function ProjectProvider({ children }) {
     { id: 74, component: <SlHeart/>},
   ]
 
-  // Function to generate ids
   function generateUniqueId() {
     return Date.now(); // It uses the timestamp as id
   }
 
-  // Add a project
   function createProject(name, palleteId, iconId, description) {
     const newProject = {
       id: generateUniqueId(),
@@ -113,8 +111,6 @@ function ProjectProvider({ children }) {
       description: description,
       tasks: []
     };
-
-    console.log(newProject);
 
     setProjects([...projects, newProject]);
   }

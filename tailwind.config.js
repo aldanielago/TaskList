@@ -27,7 +27,6 @@ export default {
       },
       fontFamily: {
         'Quicksand': 'Quicksand' || 'sans-serif',
-        'Albert': 'Albert Sans' || 'sans-serif',
       }
     },
   },

@@ -6,9 +6,9 @@ import { TaskContext } from "../../contexts/TaskContext";
 import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
-function AddTask({ projectId }) {
-  const { addTask, generateUniqueId, getCurrentLocalDate } = useContext(TaskContext);
+export function AddTask({ projectId }) {
   const { addTaskToProject } = useContext(ProjectContext);
+  const { addTask, generateUniqueId, getCurrentLocalDate } = useContext(TaskContext);
 
   const [ date, setDate ] = useState('')
   const [ inputName, setInputName ] = useState('');
@@ -65,5 +65,3 @@ function AddTask({ projectId }) {
     </>
   )
 }
-
-export { AddTask }

@@ -26,9 +26,11 @@ To install the project on your computer, you can use the "Code" button and follo
 - Copy the URL
 - Open your Git Bash
 - Write git clone and paste the url. As follows:
-``` 
+
+```
 git clone https://github.com/aldanielago/TaskList.git
-``` 
+```
+
 ### 2️⃣ Download ZIP
 
 - Click "Download ZIP"
@@ -36,9 +38,10 @@ git clone https://github.com/aldanielago/TaskList.git
 - Open the folder in your favorite IDE
 
 📢 Once completed the installation, us the following node line
-``` 
+
+```
 npm start
-``` 
+```
 
 ## 🦸🏻 Authors
 

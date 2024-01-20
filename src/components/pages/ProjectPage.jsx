@@ -10,19 +10,19 @@ import { AddTask } from '../elements/AddTask';
 export function ProjectPage() {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
 
   const project = projects.find(project => project.id == projectId);
   const filteredTasks = tasks.filter(task => project.tasks.includes(task.id)) || [];
   const message = generateMessage(filteredTasks);
 
   const [ editName, setEditName ] = useState(false);
-  const [ projectName, setProjectName ] = useState(project.name || 'Untitled project');
-  const [ editDescription, setEditDescription ] = useState(false);
-  const [ projectDescription, setProjectDescription ] = useState(project.description || '');
-  const [ editPallete, setEditPallete ] = useState(false);
   const [ editIcon, setEditIcon ] = useState(false);
+  const [ editPallete, setEditPallete ] = useState(false);
+  const [ projectName, setProjectName ] = useState(project.name);
+  const [ editDescription, setEditDescription ] = useState(false);
+  const [ projectDescription, setProjectDescription ] = useState(project.description);
 
   useEffect(() => {
     setProjectName(project.name);
@@ -46,15 +46,15 @@ export function ProjectPage() {
   }
 
   return (
-    <section className="w-full overflow-y-auto flex flex-col items-center justify-center">
-      <div className={`${project.primaryColor} w-full h-32 relative top-0`}>
+    <section className="w-full overflow-y-auto h-s flex flex-col items-center justify-center">
+      <div className={`${project.primaryColor} relative w-full h-24 md:h-[20vh]`}>
         <button className={`p-2 rounded-md border ${project.primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
             onClick={() => setEditPallete(!editPallete)}
           >Change color
         </button>
       </div>
 
-      <section className="w-full pl-6">
+      <section className="w-full md:pl-6">
         { editPallete &&
           <div className="w-40 origin-top absolute right-4 top-[7rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
             {projectsPallete.map( p =>
@@ -66,7 +66,7 @@ export function ProjectPage() {
               </button>)}
           </div>
         }
-        <div className="px-4 max-w-7xl grid w-full items-start py-2 ">
+        <div className="px-2 md:px-4 max-w-7xl grid w-full items-start py-2">
           <div className="flex items-center mt-6 gap-2 mb-2">
             <i className="text-3xl text-zinc-400 cursor-pointer" onClick={() => setEditIcon(true)}>{ project.icon ? projectIcons[project.icon].component : projectIcons[0].component }</i>
             { editIcon &&
@@ -114,5 +114,5 @@ export function ProjectPage() {
         </div>
       </section>
     </section>
-  )
+  );
 }

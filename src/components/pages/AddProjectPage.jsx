@@ -3,8 +3,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { TextInput } from "../elements/TextInput";
 import { toast, ToastContainer } from 'react-toastify';
-import { PrimaryButton } from "../buttons/PrimaryButton"
-import { ProjectContext } from "../../contexts/ProjectsContext"
+import { PrimaryButton } from "../buttons/PrimaryButton";
+import { ProjectContext } from "../../contexts/ProjectsContext";
 
 export function AddProjectPage() {
   const { projectsPallete, createProject, projectIcons } = useContext(ProjectContext);
@@ -95,5 +95,5 @@ export function AddProjectPage() {
         <PrimaryButton text="Add project" onClick={handleAddProject}/>
       </form>
     </section>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useLocalStorage(itemName, initialState){
+export function useLocalStorage(itemName, initialState){
   const [ item, setItem ] = useState(initialState);
   const [ loading, setLoading ] = useState(true);
   const [ error, setError ] = useState(false);
@@ -40,5 +40,3 @@ function useLocalStorage(itemName, initialState){
     updateInfo,
   };
 }
-
-export { useLocalStorage };

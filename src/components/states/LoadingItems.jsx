@@ -1,4 +1,4 @@
-function LoadingTasks(){
+export function LoadingTasks(){
   return (
     <>
       <div className="relative max-w-lg flex w-11/12 animate-pulse gap-2 p-4">
@@ -26,7 +26,5 @@ function LoadingTasks(){
         <div className="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
       </div>
     </>
-  )
+  );
 }
-
-export { LoadingTasks }
