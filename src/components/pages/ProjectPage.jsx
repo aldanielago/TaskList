@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { TodoItem } from '../elements/TodoItem';
-import { TaskContext } from '../../contexts/TaskContext';
-import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
-import { ProjectContext } from '../../contexts/ProjectsContext';
-import { TextInput } from '../elements/TextInput';
 import { AddTask } from '../elements/AddTask';
+import { ProjectContext } from '../../contexts/ProjectsContext';
+import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
+import { TaskContext } from '../../contexts/TaskContext';
+import { TextInput } from '../elements/TextInput';
+import { TodoItem } from '../elements/TodoItem';
 
 export function ProjectPage() {
   const navigate = useNavigate();

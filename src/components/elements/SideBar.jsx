@@ -1,7 +1,7 @@
-import { useContext } from "react";
 import { GoHome } from "react-icons/go";
-import { Link } from "react-router-dom";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 
 export function SideBar() {

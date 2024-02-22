@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
 import { BsCheckCircle } from 'react-icons/bs';
-import { TextInput } from '../elements/TextInput';
-import { TaskContext } from '../../contexts/TaskContext';
-import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
+import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { ProjectContext } from '../../contexts/ProjectsContext';
+import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
+import { TaskContext } from '../../contexts/TaskContext';
+import { TextInput } from '../elements/TextInput';
 
 export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, showProject = true }) {
   const { generateFormatDate, editTextTask, editDateTask } = useContext(TaskContext);

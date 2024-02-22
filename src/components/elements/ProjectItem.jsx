@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { TaskContext } from '../../contexts/TaskContext';
 import { ProjectContext } from '../../contexts/ProjectsContext';
+import { TaskContext } from '../../contexts/TaskContext';
+import { useContext, useEffect, useState } from "react";
 
 export function ProjectItem({ project }) {
   const { tasks } = useContext(TaskContext);

@@ -1,10 +1,10 @@
-import { TextInput } from "./TextInput";
+import { CiCalendarDate, CiCirclePlus } from "react-icons/ci";
 import { useContext, useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
-import { TaskContext } from "../../contexts/TaskContext";
-import { CiCirclePlus, CiCalendarDate } from "react-icons/ci";
 import { ProjectContext } from "../../contexts/ProjectsContext";
+import { TaskContext } from "../../contexts/TaskContext";
+import { TextInput } from "./TextInput";
+import "react-toastify/dist/ReactToastify.css";
 
 export function AddTask({ projectId }) {
   const { addTaskToProject } = useContext(ProjectContext);
