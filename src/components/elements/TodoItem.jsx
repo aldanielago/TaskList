@@ -29,13 +29,13 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
           : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`} onClick={() => setEditName(true)}>{ name == '' ? 'New task' : name}</span>
         }
         <div className='flex items-center'>
-          { (showDate && editDate)
+          { ( showDate && editDate )
             ? <TextInput item={task} value={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
             : <span className={`text-xs font-Quicksand transition-all duration-200 ease-in-out`} onClick={() => setEditDate(true)}>{ friendlyDate }</span>
           }
 
-          { (showDate && projectTask) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
-          { (showProject && projectTask && !editDate)  &&
+          { ( showDate && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
+          { ( showProject && projectTask && !editDate )  &&
             <Link to={`/projects/${projectTask.id}`} key={projectTask.id}>
               <span className={`text-xs inline-block font-Quicksand ${projectTask.secondaryColor} px-2 rounded-lg`}>{ projectTask.name }</span>
             </Link>

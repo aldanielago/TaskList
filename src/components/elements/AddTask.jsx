@@ -34,6 +34,7 @@ export function AddTask({ projectId }) {
       const taskId = generateUniqueId()
       const rawDate = date || getCurrentLocalDate();
       addTask(taskId, inputName, rawDate);
+      // In case this component is being used in a project page, the task will be added to the project
       projectId && addTaskToProject(projectId, taskId);
       setInputName('');
       setDate('');

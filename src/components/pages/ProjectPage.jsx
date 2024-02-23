@@ -59,10 +59,10 @@ export function ProjectPage() {
           <div className="w-40 origin-top absolute right-4 top-[7rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
             {projectsPallete.map( p =>
               <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
-                key={p.pallete}
-                value={p.pallete}
+                key={ p.pallete }
+                value={ p.pallete }
                 onClick={() => {handleChangePallete(p.pallete)}}
-              >{p.name}
+              >{ p.name }
               </button>)}
           </div>
         }
@@ -71,12 +71,12 @@ export function ProjectPage() {
             <i className="text-3xl text-zinc-400 cursor-pointer" onClick={() => setEditIcon(true)}>{ project.icon ? projectIcons[project.icon].component : projectIcons[0].component }</i>
             { editIcon &&
               <div className="w-40 h-40 overflow-x-auto flex flex-wrap origin-top top-48 absolute rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                {projectIcons.map( (icon) =>
+                {projectIcons.map((icon) =>
                   <button className={`block px-4 py-2 text-base text-gray-700 hover:cursor-pointer`}
-                    key={icon.id}
-                    value={icon.id}
+                    key={ icon.id }
+                    value={ icon.id }
                     onClick={() => {setEditIcon(false); changeProjectIcon(project.id, icon.id)}}
-                  >{icon.component}
+                  >{ icon.component }
                   </button>)}
               </div>
             }
@@ -100,10 +100,9 @@ export function ProjectPage() {
             <div className=" w-full py-2">
               {filteredTasks.map(task => (
               <TodoItem
-                key={task.id}
-                task={task}
-                showDate={false}
-                showProject={false}
+                key={ task.id }
+                task={ task }
+                showProject={ false }
                 onComplete={() => { completeTask(task.id) }}
                 onDelete={() => { deleteATask(task.id) }}
                 onAddProject={ addProject }
