@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import { ProjectContext } from "../../contexts/ProjectsContext";
 import { TaskContext } from "../../contexts/TaskContext";
-import { TextInput } from "./TextInput";
+import { Input } from "./Input";
 import "react-toastify/dist/ReactToastify.css";
 
 export function AddTask({ projectId }) {
@@ -45,7 +45,7 @@ export function AddTask({ projectId }) {
     <>
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <section className="max-w-lg px-3 py-2 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md border-slate-400 border border-opacity-5">
-        <TextInput item={null} value={inputName} onChange={setInputName} setEdit={null} mainFunction={handleAddTask} text={'small'} placeholder={"Task's name"}/>
+        <Input item={null} value={inputName} onChange={setInputName} setEdit={null} mainFunction={handleAddTask} text={'small'} placeholder={"Task's name"}/>
         <div className="flex items-center gap-3">
           <div className="relative flex items-center">
             <input

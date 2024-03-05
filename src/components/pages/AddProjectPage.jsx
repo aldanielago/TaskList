@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import { PrimaryButton } from "../buttons/PrimaryButton";
+import { PrimaryButton } from "../elements/PrimaryButton";
 import { ProjectContext } from "../../contexts/ProjectsContext";
-import { TextInput } from "../elements/TextInput";
+import { Input } from "../elements/Input";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -60,11 +60,11 @@ export function AddProjectPage() {
       <form className="flex flex-col pl-4 pt-4">
         <label className="flex flex-col gap-3 mb-4">
           <span className="font-Quicksand">Type the project&apos;s name</span>
-          <TextInput placeholder={"Project's name"} onChange={handleChange} name={"name"}/>
+          <Input placeholder={"Project's name"} onChange={handleChange} name={"name"}/>
         </label>
         <label className="flex flex-col gap-3 pb-4">
           <span className="font-Quicksand">Add a description</span>
-          <TextInput placeholder={"Project's description"} onChange={handleChange} name={"description"}/>
+          <Input placeholder={"Project's description"} onChange={handleChange} name={"description"}/>
         </label>
         <label className="flex flex-col gap-3 pb-4 max-w-[90%]">
           <span className="font-Quicksand">Choose an icon: </span>

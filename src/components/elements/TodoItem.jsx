@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { ProjectContext } from '../../contexts/ProjectsContext';
 import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
 import { TaskContext } from '../../contexts/TaskContext';
-import { TextInput } from '../elements/TextInput';
+import { Input } from './Input';
 
 export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, showProject = true }) {
   const { generateFormatDate, editTextTask, editDateTask } = useContext(TaskContext);
@@ -25,19 +25,27 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
       </button>
       <div className="flex flex-col w-full">
         { editName
-          ? <TextInput item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
-          : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`} onClick={() => setEditName(true)}>{ name == '' ? 'New task' : name}</span>
+          ? <Input item={task} inicialValue={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
+          : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`}
+              onClick={() => setEditName(true)}>
+              { name == '' ? 'New task' : name}
+            </span>
         }
         <div className='flex items-center'>
           { ( showDate && editDate )
-            ? <TextInput item={task} value={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
-            : <span className={`text-xs font-Quicksand transition-all duration-200 ease-in-out`} onClick={() => setEditDate(true)}>{ friendlyDate }</span>
+            ? <Input item={task} inicialValue={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
+            : <span className={`text-xs font-Quicksand transition-all duration-200 ease-in-out`}
+                onClick={() => setEditDate(true)}>
+                { friendlyDate }
+              </span>
           }
 
-          { ( showDate && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
+          { ( showDate && projectTask && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
           { ( showProject && projectTask && !editDate )  &&
             <Link to={`/projects/${projectTask.id}`} key={projectTask.id}>
-              <span className={`text-xs inline-block font-Quicksand ${projectTask.secondaryColor} px-2 rounded-lg`}>{ projectTask.name }</span>
+              <span className={`text-xs inline-block font-Quicksand ${projectTask.secondaryColor} px-2 rounded-lg`}>
+                { projectTask.name }
+              </span>
             </Link>
           }
         </div>

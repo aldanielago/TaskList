@@ -1,8 +1,8 @@
 import { AddTask } from "../elements/AddTask";
 import { InformativeBox } from "../elements/InformativeBox";
 import { Link } from "react-router-dom";
-import { LoadingTasks } from "../states/LoadingItems";
-import { PrimaryButton } from "../buttons/PrimaryButton";
+import { LoadingTasks } from "../useful/LoadingItems";
+import { PrimaryButton } from "../elements/PrimaryButton";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 import { ProjectItem } from "../elements/ProjectItem";
 import { TaskContext } from "../../contexts/TaskContext";

@@ -6,7 +6,7 @@ It's not the commom todo-list app. In this aplication you can distribute your ta
 
 ## ⚙ Technologies
 <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" width="80" height="80"/>&nbsp;
-<img src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-plain.svg" width="80" height="80"/>&nbsp;
+<img src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-original.svg" width="80" height="80"/>&nbsp;
 
 ## ✨ Features
 - Add, edit, and remove tasks within each project.
