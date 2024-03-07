@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 export function AddProjectPage() {
-  const { projectsPallete, createProject, projectIcons } = useContext(ProjectContext);
+  const { projectsPalette, createProject, projectIcons } = useContext(ProjectContext);
   const navigate = useNavigate();
 
   const notify = () => {
@@ -82,9 +82,9 @@ export function AddProjectPage() {
         <label className="flex flex-col gap-3 mb-4 max-w-[90%]">
           <span className="font-Quicksand">Choose a color</span>
           <div className="flex gap-3 overflow-x-auto pr-2">
-            { projectsPallete.map((p, index) =>
+            { projectsPalette.map((p, index) =>
                 <label key={index}>
-                  <input type="radio" name="color" value={p.pallete} className="hidden" onChange={(e) => handleChange(e)}/>
+                  <input type="radio" name="color" value={p.id} className="hidden" onChange={(e) => handleChange(e)}/>
                   <span
                     className={`font-Quicksand block border ${p.primaryColor} hover:cursor-pointer hover:${p.secondaryColor} w-12 h-12 rounded-full`}>
                   </span>

@@ -8,7 +8,7 @@ import { Input } from './Input';
 
 export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = true, showProject = true }) {
   const { generateFormatDate, editTextTask, editDateTask } = useContext(TaskContext);
-  const { projects } = useContext(ProjectContext);
+  const { projects, projectsPalette } = useContext(ProjectContext);
 
   const [ name, setName ] = useState(task.text);
   const [ editName, setEditName ] = useState(false);
@@ -43,7 +43,7 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
           { ( showDate && projectTask && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
           { ( showProject && projectTask && !editDate )  &&
             <Link to={`/projects/${projectTask.id}`} key={projectTask.id}>
-              <span className={`text-xs inline-block font-Quicksand ${projectTask.secondaryColor} px-2 rounded-lg`}>
+              <span className={`text-xs inline-block font-Quicksand ${projectsPalette[projectTask.paletteId].secondaryColor} px-2 rounded-lg`}>
                 { projectTask.name }
               </span>
             </Link>

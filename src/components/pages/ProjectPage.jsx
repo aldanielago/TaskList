@@ -11,7 +11,7 @@ export function ProjectPage() {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { tasks, completeTask, deleteTask, addProject, notifyEventListeners, generateMessage } = useContext(TaskContext);
-  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPallete, changePalleteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
+  const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPalette, changePaletteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
 
   const project = projects.find(project => project.id == projectId);
   const filteredTasks = tasks.filter(task => project.tasks.includes(task.id)) || [];
@@ -19,7 +19,7 @@ export function ProjectPage() {
 
   const [ editName, setEditName ] = useState(false);
   const [ editIcon, setEditIcon ] = useState(false);
-  const [ editPallete, setEditPallete ] = useState(false);
+  const [ editPalette, setEditPalette ] = useState(false);
   const [ projectName, setProjectName ] = useState(project.name);
   const [ editDescription, setEditDescription ] = useState(false);
   const [ projectDescription, setProjectDescription ] = useState(project.description);
@@ -40,28 +40,28 @@ export function ProjectPage() {
     navigate('/');
   }
 
-  const handleChangePallete = (newPalleteId) => {
-    setEditPallete(false);
-    changePalleteProject(project.id, newPalleteId);
+  const handleChangePalette = (newPaletteId) => {
+    setEditPalette(false);
+    changePaletteProject(project.id, newPaletteId);
   }
 
   return (
     <section className="w-full overflow-y-auto h-s flex flex-col items-center justify-center">
-      <div className={`${project.primaryColor} relative w-full h-24 md:h-[20vh]`}>
-        <button className={`p-2 rounded-md border ${project.primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
-            onClick={() => setEditPallete(!editPallete)}
+      <div className={`${projectsPalette[project.paletteId].primaryColor} relative w-full h-24 md:h-[20vh]`}>
+        <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
+            onClick={() => setEditPalette(!editPalette)}
           >Change color
         </button>
       </div>
 
       <section className="w-full md:pl-6">
-        { editPallete &&
+        { editPalette &&
           <div className="w-40 origin-top absolute right-4 top-[7rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-            { projectsPallete.map( p =>
+            { projectsPalette.map( p =>
               <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
-                key={ p.pallete }
-                value={ p.pallete }
-                onClick={() => {handleChangePallete(p.pallete)}}
+                key={ p.id }
+                value={ p.id }
+                onClick={() => {handleChangePalette(p.id)}}
               >{ p.name }
               </button>)}
           </div>

@@ -10,13 +10,13 @@ const ProjectContext = createContext();
 function ProjectProvider({ children }) {
   const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('PROJECTS_V1', []);
 
-  const projectsPallete = [
-    { pallete: 0, name:'Blue', primaryColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
-    { pallete: 1, name:'Green', primaryColor: 'bg-light-green', secondaryColor: 'bg-very-light-green' },
-    { pallete: 2, name:'Pink', primaryColor: 'bg-light-pink', secondaryColor: 'bg-very-light-pink' },
-    { pallete: 3, name:'Yellow', primaryColor: 'bg-light-yellow', secondaryColor: 'bg-very-light-yellow' },
-    { pallete: 4, name:'Menta', primaryColor: 'bg-menta', secondaryColor: 'bg-light-menta' },
-    { pallete: 5, name:'Purple', primaryColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
+  const projectsPalette = [
+    { id: 0, name:'Blue', primaryColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
+    { id: 1, name:'Green', primaryColor: 'bg-light-green', secondaryColor: 'bg-very-light-green' },
+    { id: 2, name:'Pink', primaryColor: 'bg-light-pink', secondaryColor: 'bg-very-light-pink' },
+    { id: 3, name:'Yellow', primaryColor: 'bg-light-yellow', secondaryColor: 'bg-very-light-yellow' },
+    { id: 4, name:'Menta', primaryColor: 'bg-menta', secondaryColor: 'bg-light-menta' },
+    { id: 5, name:'Purple', primaryColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
   ];
 
   const projectIcons = [
@@ -101,13 +101,12 @@ function ProjectProvider({ children }) {
     return Date.now(); // It uses the timestamp as id
   }
 
-  function createProject(name, palleteId, iconId, description) {
+  function createProject(name, paletteId, iconId, description) {
     const newProject = {
       id: generateUniqueId(),
       name: name,
       icon: iconId,
-      primaryColor: projectsPallete[palleteId].primaryColor,
-      secondaryColor: projectsPallete[palleteId].secondaryColor,
+      paletteId: paletteId,
       description: description,
       tasks: []
     };
@@ -149,13 +148,12 @@ function ProjectProvider({ children }) {
     setProjects(newProjects);
   }
 
-  function changePalleteProject(projectId, idPallete) {
+  function changePaletteProject(projectId, idPalette) {
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
         return {
           ...p,
-          primaryColor: projectsPallete[idPallete].primaryColor,
-          secondaryColor: projectsPallete[idPallete].secondaryColor,
+          paletteId: idPalette
         };
       } else {
         return p;
@@ -219,13 +217,13 @@ function ProjectProvider({ children }) {
       loading,
       projects,
       projectIcons,
-      projectsPallete,
+      projectsPalette,
       createProject,
       deleteProject,
       addTaskToProject,
       changeProjectIcon,
       changeNameProject,
-      changePalleteProject,
+      changePaletteProject,
       removeTaskFromProject,
       changeProjectDescription,
     }}>
