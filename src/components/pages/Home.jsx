@@ -11,13 +11,7 @@ import { useContext } from "react";
 
 export function Home() {
   const { projects, addTaskToProject, removeTaskFromProject } = useContext(ProjectContext);
-  const { loading, tasks, generateMessage, deleteTask, completeTask, notifyEventListeners } = useContext(TaskContext);
-
-  const sortedTasks = tasks.slice().sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return dateA - dateB;
-  });
+  const { loading, tasks, sortedTasks, generateMessage, deleteTask, completeTask, notifyEventListeners } = useContext(TaskContext);
 
   const handleAddProject = (taskId, projectId) => {
     removeTaskFromProject(taskId);
@@ -31,6 +25,7 @@ export function Home() {
     notifyEventListeners();
   }
 
+  // This return a meeting message based on the number of tasks
   const message = generateMessage(tasks);
 
   return (

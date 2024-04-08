@@ -1,15 +1,15 @@
-import { useState } from 'react';
-
-export function Input({ item, inicialValue = '', setEdit, mainFunction, text = 'small', placeholder, type = "text", name, onChange }) {
-  const [ value, setValue ] = useState(inicialValue);
-
+// item represent a task a project to edit information
+export function Input({ type = "text", item, value, name, setEdit, onChange, mainFunction, text = 'small', placeholder, }) {
   // we use 'item' to specify if we are editing a property inside a project or a task
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      item ? mainFunction(item.id, value) : mainFunction(value);
-      setEdit && setEdit(false);
-    } else if (e.key === 'Escape') {
-      setEdit && setEdit(false);
+      // mainFunction will take two arguments only if we are editing a property inside a project or a task (item)
+      if(item) {
+        mainFunction(item.id, value)
+        setEdit(false)
+      } else {
+        mainFunction()
+      }
     }
   };
 
@@ -21,11 +21,7 @@ export function Input({ item, inicialValue = '', setEdit, mainFunction, text = '
       value={ value }
       placeholder={ placeholder }
       onKeyDown={ handleKeyDown }
-      onChange={(e) => {
-        setValue(e.target.value)
-        onChange && onChange(e);
-        console.log(value)
-      }}
+      onChange={(e) => { onChange && onChange(e.target.value); console.log(value)}}
     />}
 
     {type == "date" &&
@@ -34,7 +30,7 @@ export function Input({ item, inicialValue = '', setEdit, mainFunction, text = '
       value={ value }
       onClick={ handleKeyDown }
       onKeyDown={ handleKeyDown }
-      onChange={(e) => { setValue(e.target.value) }}
+      onChange={(e) => { onChange && onChange(e.target.value) }}
     />}
   </>
   );

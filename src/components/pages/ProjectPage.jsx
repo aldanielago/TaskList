@@ -27,7 +27,7 @@ export function ProjectPage() {
   useEffect(() => {
     setProjectName(project.name);
     setProjectDescription(project.description);
-  }, [ project ]);
+  }, [ project.id ]);
 
   const handleDeleteATask = (taskId) => {
     deleteTask(taskId);
@@ -45,7 +45,7 @@ export function ProjectPage() {
     changePaletteProject(project.id, newPaletteId);
   }
 
-  const handlChangeProjectIcon = (iconId) => {
+  const handleChangeProjectIcon = (iconId) => {
     setEditIcon(false);
     changeProjectIcon(project.id, iconId)
   }
@@ -80,13 +80,13 @@ export function ProjectPage() {
                   <button className={`block px-4 py-2 text-base text-gray-700 hover:cursor-pointer`}
                     key={ icon.id }
                     value={ icon.id }
-                    onClick={() => { () => handlChangeProjectIcon(icon.id) }}
+                    onClick={() => { () => handleChangeProjectIcon(icon.id) }}
                   >{ icon.component }
                   </button>)}
               </div>
             }
             { editName
-              ? <Input text={'big'} item={project} inicialValue={projectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
+              ? <Input text={'big'} item={project} value={projectName} onChange={setProjectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
               : <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
             }
             { !editName && <SmallOptionsMenu onDelete={handleDeleteProject} /> }
@@ -94,7 +94,7 @@ export function ProjectPage() {
 
           { !editDescription
               ? <p className="text-xs font-Quicksand text-gray-font" onClick={() => setEditDescription(true)}>{projectDescription == '' ? 'Add a description' : projectDescription}</p>
-              : <Input placeholder={'Description'} item={project} inicialValue={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
+              : <Input placeholder={'Description'} item={project} value={projectDescription} onChange={setProjectDescription} setEdit={setEditDescription} mainFunction={changeProjectDescription}/>
           }
 
           <h2 className="font-Quicksand text-lg font-semibold mt-4">Tasks</h2>

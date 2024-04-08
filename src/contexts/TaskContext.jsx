@@ -15,6 +15,12 @@ function TaskProvider({ children }) {
     eventListeners.forEach((listener) => listener());
   };
 
+  const sortedTasks = tasks.slice().sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateA - dateB;
+  });
+
   // Function to generate ids
   function generateUniqueId() {
     return Date.now(); // It uses the timestamp as id
@@ -178,6 +184,7 @@ function TaskProvider({ children }) {
       loading,
       error,
       tasks,
+      sortedTasks,
       addTask,
       deleteTask,
       editTextTask,

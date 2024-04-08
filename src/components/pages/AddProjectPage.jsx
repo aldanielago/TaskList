@@ -39,6 +39,7 @@ export function AddProjectPage() {
     });
   }
 
+  // If the project name is empty, it will show a toast message, otherwise it will create the project and navigate to the home page.
   function handleAddProject() {
     if(project.name === '') {
       notify();

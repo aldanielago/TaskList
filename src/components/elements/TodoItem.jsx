@@ -25,7 +25,7 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
       </button>
       <div className="flex flex-col w-full">
         { editName
-          ? <Input item={task} inicialValue={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
+          ? <Input item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
           : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`}
               onClick={() => setEditName(true)}>
               { name == '' ? 'New task' : name}
@@ -33,7 +33,7 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
         }
         <div className='flex items-center'>
           { ( showDate && editDate )
-            ? <Input item={task} inicialValue={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
+            ? <Input item={task} value={date} onChange={setDate} setEdit={setEditDate} mainFunction={editDateTask} text={'small'} type="date"/>
             : <span className={`text-xs font-Quicksand transition-all duration-200 ease-in-out`}
                 onClick={() => setEditDate(true)}>
                 { friendlyDate }
