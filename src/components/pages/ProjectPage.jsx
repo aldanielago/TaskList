@@ -29,13 +29,13 @@ export function ProjectPage() {
     setProjectDescription(project.description);
   }, [ project ]);
 
-  const deleteATask = (taskId) => {
+  const handleDeleteATask = (taskId) => {
     deleteTask(taskId);
     removeTaskFromProject(taskId);
     notifyEventListeners();
   }
 
-  const onDeleteProject = () => {
+  const handleDeleteProject = () => {
     deleteProject(project.id);
     navigate('/');
   }
@@ -43,6 +43,11 @@ export function ProjectPage() {
   const handleChangePalette = (newPaletteId) => {
     setEditPalette(false);
     changePaletteProject(project.id, newPaletteId);
+  }
+
+  const handlChangeProjectIcon = (iconId) => {
+    setEditIcon(false);
+    changeProjectIcon(project.id, iconId)
   }
 
   return (
@@ -61,7 +66,7 @@ export function ProjectPage() {
               <button className={`block px-4 py-2 text-sm text-gray-700 w-full text-start ${p.primaryColor} hover:${p.secondaryColor} hover:cursor-pointer`}
                 key={ p.id }
                 value={ p.id }
-                onClick={() => {handleChangePalette(p.id)}}
+                onClick={() => { handleChangePalette(p.id)} }
               >{ p.name }
               </button>)}
           </div>
@@ -75,7 +80,7 @@ export function ProjectPage() {
                   <button className={`block px-4 py-2 text-base text-gray-700 hover:cursor-pointer`}
                     key={ icon.id }
                     value={ icon.id }
-                    onClick={() => {setEditIcon(false); changeProjectIcon(project.id, icon.id)}}
+                    onClick={() => { () => handlChangeProjectIcon(icon.id) }}
                   >{ icon.component }
                   </button>)}
               </div>
@@ -84,7 +89,7 @@ export function ProjectPage() {
               ? <Input text={'big'} item={project} inicialValue={projectName} setEdit={setEditName} mainFunction={changeNameProject} placeholder={'Project name'}/>
               : <h1 className="font-bold inline tracking-wide font-Quicksand text-lg" onClick={() => setEditName(true)}>{ projectName == '' ? 'Untitle project' : projectName }</h1>
             }
-            { !editName && <SmallOptionsMenu onDelete={onDeleteProject} /> }
+            { !editName && <SmallOptionsMenu onDelete={handleDeleteProject} /> }
           </div>
 
           { !editDescription
@@ -104,7 +109,7 @@ export function ProjectPage() {
                 task={ task }
                 showProject={ false }
                 onComplete={() => { completeTask(task.id) }}
-                onDelete={() => { deleteATask(task.id) }}
+                onDelete={() => { handleDeleteATask(task.id) }}
                 onAddProject={ addProject }
               />
             ))}

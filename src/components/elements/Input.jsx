@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function Input({ item, inicialValue, setEdit, mainFunction, text = 'small', placeholder, type = "text", name, onChange }) {
+export function Input({ item, inicialValue = '', setEdit, mainFunction, text = 'small', placeholder, type = "text", name, onChange }) {
   const [ value, setValue ] = useState(inicialValue);
 
   // we use 'item' to specify if we are editing a property inside a project or a task
@@ -24,6 +24,7 @@ export function Input({ item, inicialValue, setEdit, mainFunction, text = 'small
       onChange={(e) => {
         setValue(e.target.value)
         onChange && onChange(e);
+        console.log(value)
       }}
     />}
 

@@ -7,11 +7,11 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ toAddProject, setToAddProject] = useState(false);
   const menuRef = useRef(null);
+
   let haveProject = false;
   if(onAddProject) {
     haveProject = projects.find( p => p.tasks.includes(item.id)) ? true : false || false;
   }
-  console.log(item);
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
@@ -27,7 +27,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
     setIsOpen(false);
   };
 
-  const addProject = (p) => {
+  const handleAddProject = (p) => {
     onAddProject(item.id, p.id);
     setToAddProject(false);
   };
@@ -71,7 +71,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
           {projects.map( p => <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
             key={p.id}
             value={p.id}
-            onClick={() => { addProject(p) }}
+            onClick={() => { handleAddProject(p) }}
           >{p.name}
           </button>)}
         </div>

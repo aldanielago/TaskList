@@ -1,7 +1,7 @@
 import { AddTask } from "../elements/AddTask";
 import { InformativeBox } from "../elements/InformativeBox";
 import { Link } from "react-router-dom";
-import { LoadingTasks } from "../useful/LoadingItems";
+import { LoadingTasks } from "../usefull/LoadingItems";
 import { PrimaryButton } from "../elements/PrimaryButton";
 import { ProjectContext } from "../../contexts/ProjectsContext";
 import { ProjectItem } from "../elements/ProjectItem";
@@ -19,13 +19,13 @@ export function Home() {
     return dateA - dateB;
   });
 
-  const addProject = (taskId, projectId) => {
+  const handleAddProject = (taskId, projectId) => {
     removeTaskFromProject(taskId);
     addTaskToProject(projectId, taskId);
     notifyEventListeners();
   }
 
-  const deleteATask = (taskId) => {
+  const handleDeleteATask = (taskId) => {
     deleteTask(taskId);
     removeTaskFromProject(taskId);
     notifyEventListeners();
@@ -43,15 +43,15 @@ export function Home() {
         <section className="w-full flex flex-col items-center mt-2 pb-8 md:items-start">
           <h3 className="pt-4 font-Quicksand self-start text-sm font-semibold ">Today&apos;s taks</h3>
           <AddTask />
-          {loading && <LoadingTasks />}
+          {loading && <LoadingTasks count={3}/>}
           {!loading && sortedTasks.length === 0 && <InformativeBox item="tasks" time="for today" />}
           {sortedTasks.map((task) => (
             <TodoItem
               key={task.id}
               task={task}
               onComplete={() => { completeTask(task.id) }}
-              onDelete={() => { deleteATask(task.id) }}
-              onAddProject={ addProject }
+              onDelete={() => { handleDeleteATask(task.id) }}
+              onAddProject={ handleAddProject }
             />
           ))}
         </section>

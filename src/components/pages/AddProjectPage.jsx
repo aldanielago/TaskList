@@ -10,6 +10,7 @@ export function AddProjectPage() {
   const { projectsPalette, createProject, projectIcons } = useContext(ProjectContext);
   const navigate = useNavigate();
 
+  // This function will be called when the user tries to add a project without a name, showing a toast message.
   const notify = () => {
       toast('Please, fill all the information. ', {
       position: "top-center",
@@ -30,6 +31,7 @@ export function AddProjectPage() {
     description: '',
   });
 
+  // For this function the input must have a name attribute that equals the key of the state object, otherwise it won't work.
   function handleChange(e) {
     setProject({
       ...project,

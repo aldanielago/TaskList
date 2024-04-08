@@ -24,7 +24,7 @@ export function useLocalStorage(itemName, initialState){
         setLoading(false);
       }
     }, 2000);
-  })
+  }, [itemName, initialState])
 
 
   // This function update the state and local storage at the same time
