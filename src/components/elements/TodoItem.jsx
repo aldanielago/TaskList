@@ -16,17 +16,17 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
   const [ editDate, setEditDate ] = useState(false);
 
   const friendlyDate = generateFormatDate(date);
-  const projectTask = projects.find(p => p.tasks.includes(task.id));
+  const projectTask = projects.find(p => p.tasksId.includes(task.id));
 
   return (
-    <section className="bg-secondary-light max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
+    <section className="bg-pgray-100 max-w-lg p-3 mt-2 w-11/12 rounded-3xl flex gap-3 items-center justify-between shadow-md">
       <button className="bg-unset cursor-pointer" onClick={onComplete}>
-      <BsCheckCircle size={30} className={`${task.completed ? "text-green-600" : "text-zinc-400"} transition-colors duration-200 delay-150 ease-in-out`}/>
+      <BsCheckCircle size={30} className={`${task.isCompleted ? "text-green-600" : "text-zinc-400"} transition-colors duration-200 delay-150 ease-in-out`}/>
       </button>
       <div className="flex flex-col w-full">
         { editName
           ? <Input item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
-          : <span className={`text-sm font-Quicksand ${task.completed ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`}
+          : <span className={`text-sm font-Quicksand ${task.isCompleted ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`}
               onClick={() => setEditName(true)}>
               { name == '' ? 'New task' : name}
             </span>
@@ -40,7 +40,7 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
               </span>
           }
 
-          { ( showDate && projectTask && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-gray-font"> • </span>}
+          { ( showDate && projectTask && showProject ) && <span className="text-xs inline-block font-Quicksand mx-2 text-pgray-700"> • </span>}
           { ( showProject && projectTask && !editDate )  &&
             <Link to={`/projects/${projectTask.id}`} key={projectTask.id}>
               <span className={`text-xs inline-block font-Quicksand ${projectsPalette[projectTask.paletteId].secondaryColor} px-2 rounded-lg`}>

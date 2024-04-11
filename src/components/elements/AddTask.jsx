@@ -22,7 +22,7 @@ export function AddTask({ projectId }) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      progressClassName: "primary-blue"
+      progressClassName: "pblue-500"
     });
   }
 
@@ -59,7 +59,7 @@ export function AddTask({ projectId }) {
             className="cursor-pointer outline-none hover:rotate-90 duration-300 p-0"
             onClick={handleAddTask}
           >
-            <CiCirclePlus size={40} className="text-zinc-400 duration-300 font-bold hover:text-light-green transition-colors"/>
+            <CiCirclePlus size={40} className="text-zinc-400 duration-300 font-bold hover:text-pgreen-600 transition-colors"/>
           </button>
         </div>
       </section>

@@ -14,7 +14,7 @@ export function ProjectPage() {
   const { projects, removeTaskFromProject, deleteProject, changeNameProject, projectsPalette, changePaletteProject, changeProjectDescription, projectIcons, changeProjectIcon } = useContext(ProjectContext);
 
   const project = projects.find(project => project.id == projectId);
-  const filteredTasks = tasks.filter(task => project.tasks.includes(task.id)) || [];
+  const filteredTasks = tasks.filter(task => project.tasksId.includes(task.id)) || [];
   const message = generateMessage(filteredTasks);
 
   const [ editName, setEditName ] = useState(false);
@@ -53,7 +53,7 @@ export function ProjectPage() {
   return (
     <section className="w-full overflow-y-auto h-s flex flex-col items-center justify-center">
       <div className={`${projectsPalette[project.paletteId].primaryColor} relative w-full h-24 md:h-[20vh]`}>
-        <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-light-green' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
+        <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
             onClick={() => setEditPalette(!editPalette)}
           >Change color
         </button>

@@ -10,7 +10,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
 
   let haveProject = false;
   if(onAddProject) {
-    haveProject = projects.find( p => p.tasks.includes(item.id)) ? true : false || false;
+    haveProject = projects.find( p => p.tasksId.includes(item.id)) ? true : false || false;
   }
 
   const handleMenuToggle = () => {
@@ -55,7 +55,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
 
   return (
     <div>
-      <MdOutlineMoreHoriz size={35} className="text-zinc-400 hover:text-primary-blue transition-colors ease-linear hover:cursor-pointer" onClick={handleMenuToggle}/>
+      <MdOutlineMoreHoriz size={35} className="text-zinc-400 hover:text-pblue-500 transition-colors ease-linear hover:cursor-pointer" onClick={handleMenuToggle}/>
       {isOpen && (
         <div ref={menuRef} className="origin-top absolute mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1">

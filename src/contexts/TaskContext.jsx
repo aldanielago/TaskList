@@ -40,19 +40,19 @@ function TaskProvider({ children }) {
       id: id,
       text: text,
       date: date,
-      completed: false
+      isCompleted: false
     };
 
     setTasks([...tasks, newTask]);
   }
 
-  // Function to set the completed state
+  // Function to set the isCompleted state
   function completeTask(taskId) {
     setTasks(tasks.map(t => {
       if(t.id === taskId){
         return {
           ...t,
-          completed: !t.completed
+          isCompleted: !t.isCompleted
         }
       } else {
         return t
@@ -79,22 +79,22 @@ function TaskProvider({ children }) {
     }))
   }
 
-  // This function generates a messages in base on the completed tasks and its lenght
+  // This function generates a messages in base on the isCompleted tasks and its lenght
   function generateMessage(tasks) {
     if(tasks == []) return null
-    const completedTasks = tasks.filter( task => task.completed ).length;
-    if(completedTasks == tasks.length && tasks.length == 0){
+    const isCompletedTasks = tasks.filter( task => task.isCompleted ).length;
+    if(isCompletedTasks == tasks.length && tasks.length == 0){
       return (
         <span> No tasks, you can rest for today 😎</span>
       )
-    } if (completedTasks == tasks.length && tasks.length != 0) {
+    } if (isCompletedTasks == tasks.length && tasks.length != 0) {
       return (
         <span> You have done everything for today! Keep going 😉 </span>
       )
     } else {
       return (
         <span>You have finished
-          <span className="font-bold ml-1">{completedTasks}</span> of
+          <span className="font-bold ml-1">{isCompletedTasks}</span> of
           <span className="font-bold ml-1">{tasks.length}</span> tasks.
         </span>
       )

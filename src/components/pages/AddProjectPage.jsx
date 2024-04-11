@@ -20,7 +20,7 @@ export function AddProjectPage() {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      progressClassName: "primary-blue"
+      progressClassName: "pblue-500"
     });
   }
 
@@ -41,6 +41,7 @@ export function AddProjectPage() {
 
   // If the project name is empty, it will show a toast message, otherwise it will create the project and navigate to the home page.
   function handleAddProject() {
+    console.log(project)
     if(project.name === '') {
       notify();
       return;
@@ -75,7 +76,7 @@ export function AddProjectPage() {
             { projectIcons.map((icon, index) =>
               <label key={index}>
                 <input type="radio" name="icon" value={index} className="hidden" onChange={(e) => handleChange(e)}/>
-                <span className="font-Quicksand flex border hover:cursor-pointer hover:primary-blue w-12 h-12 rounded-full justify-center items-center">
+                <span className="font-Quicksand flex border hover:cursor-pointer hover:pblue-500 w-12 h-12 rounded-full justify-center items-center">
                   <i className="text-2xl">{ icon.component }</i>
                 </span>
               </label>

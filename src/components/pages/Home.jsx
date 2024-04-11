@@ -32,7 +32,7 @@ export function Home() {
     <section className="w-full h-screen overflow-y-auto pl-6">
       <div className="pt-4">
         <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
-        <p className="text-xs font-Quicksand text-gray-font">{message}</p>
+        <p className="text-xs font-Quicksand text-pgray-700">{message}</p>
       </div>
       <section className="flex flex-col w-full md:flex-col-reverse">
         <section className="w-full flex flex-col items-center mt-2 pb-8 md:items-start">

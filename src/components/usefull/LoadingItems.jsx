@@ -1,7 +1,7 @@
 export function LoadingTasks({ count }) {
   const loadingTasksArray = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let i in count) {
     loadingTasksArray.push(
       <div key={i} className="relative max-w-lg flex w-11/12 animate-pulse gap-2 p-4">
         <div className="h-12 w-12 rounded-full bg-slate-400"></div>

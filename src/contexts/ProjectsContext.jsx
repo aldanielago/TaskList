@@ -11,12 +11,12 @@ function ProjectProvider({ children }) {
   const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('PROJECTS_V1', []);
 
   const projectsPalette = [
-    { id: 0, name:'Blue', primaryColor: 'bg-light-blue', secondaryColor: 'bg-very-light-blue' },
-    { id: 1, name:'Green', primaryColor: 'bg-light-green', secondaryColor: 'bg-very-light-green' },
-    { id: 2, name:'Pink', primaryColor: 'bg-light-pink', secondaryColor: 'bg-very-light-pink' },
-    { id: 3, name:'Yellow', primaryColor: 'bg-light-yellow', secondaryColor: 'bg-very-light-yellow' },
-    { id: 4, name:'Menta', primaryColor: 'bg-menta', secondaryColor: 'bg-light-menta' },
-    { id: 5, name:'Purple', primaryColor: 'bg-light-purple', secondaryColor: 'bg-very-light-purple' },
+    { id: 0, name:'Blue', primaryColor: 'bg-pblue-100', secondaryColor: 'bg-pblue-50' },
+    { id: 1, name:'Green', primaryColor: 'bg-pgreen-600', secondaryColor: 'bg-pgreen-300' },
+    { id: 2, name:'Pink', primaryColor: 'bg-ppink-100', secondaryColor: 'bg-ppink-200' },
+    { id: 3, name:'Yellow', primaryColor: 'bg-pyellow-300', secondaryColor: 'bg-pyellow-100' },
+    { id: 4, name:'Menta', primaryColor: 'bg-menta-200', secondaryColor: 'bg-menta-100' },
+    { id: 5, name:'Purple', primaryColor: 'bg-ppurple-200', secondaryColor: 'bg-ppurple-100' },
   ];
 
   const projectIcons = [
@@ -108,7 +108,7 @@ function ProjectProvider({ children }) {
       icon: iconId,
       paletteId: paletteId,
       description: description,
-      tasks: []
+      tasksId: []
     };
 
     setProjects([...projects, newProject]);
@@ -183,12 +183,12 @@ function ProjectProvider({ children }) {
         if (p.tasks === undefined) {
           return {
             ...p,
-            tasks: [taskId]
+            tasksId: [taskId]
           };
         } else {
           return {
             ...p,
-            tasks: [...p.tasks, taskId]
+            tasksId: [...p.tasksId, taskId]
           };
         }
       } else {
@@ -203,7 +203,7 @@ function ProjectProvider({ children }) {
         const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject != taskId);
         return {
           ...p,
-          tasks: newTasks
+          tasksId: newTasks
         };
       } else {
         return p;
