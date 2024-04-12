@@ -1,6 +1,7 @@
+import { AddTask } from '../elements/AddTask';
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AddTask } from '../elements/AddTask';
+import { HiArrowCircleLeft } from "react-icons/hi";
 import { ProjectContext } from '../../contexts/ProjectsContext';
 import { SmallOptionsMenu } from '../elements/SmallOptionsMenu';
 import { TaskContext } from '../../contexts/TaskContext';
@@ -50,16 +51,21 @@ export function ProjectPage() {
     changeProjectIcon(project.id, iconId)
   }
 
+  function goBackHome() {
+    navigate('/');
+  }
+
   return (
-    <section className="w-full overflow-y-auto h-s flex flex-col items-center justify-center">
+    <section className="w-full overflow-y-auto flex flex-col items-center justify-center">
       <div className={`${projectsPalette[project.paletteId].primaryColor} relative w-full h-24 md:h-[20vh]`}>
-        <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'border-white text-white' : 'border-black'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
+      <HiArrowCircleLeft className={`${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'text-white' : 'text-pgray-700'} text-4xl relative top-5 left-3 md:invisible`} onClick={goBackHome}/>
+        <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'border-white text-white' : 'border-pgray-700'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}
             onClick={() => setEditPalette(!editPalette)}
           >Change color
         </button>
       </div>
 
-      <section className="w-full md:pl-6">
+      <section className="w-full pl-4 md:pl-6">
         { editPalette &&
           <div className="w-40 origin-top absolute right-4 top-[7rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
             { projectsPalette.map( p =>

@@ -5,6 +5,7 @@ import { Input } from "../elements/Input";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { HiArrowCircleLeft } from "react-icons/hi";
 
 export function AddProjectPage() {
   const { projectsPalette, createProject, projectIcons } = useContext(ProjectContext);
@@ -57,10 +58,15 @@ export function AddProjectPage() {
     }
   }
 
+  function goBackHome() {
+    navigate('/');
+  }
+
   return (
-    <section className="h-screen overflow-auto pl-6">
+    <section className="h-screen w-screen overflow-auto pl-6">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
-      <h1 className="font-Quicksand font-bold text-xl pl-4 pt-12">Add a project</h1>
+      <HiArrowCircleLeft className="text-pblue-500 text-4xl relative top-5 left-3 md:invisible" onClick={goBackHome}/>
+      <h1 className="font-Quicksand font-bold text-xl pl-4 pt-8">Add a project</h1>
       <form className="flex flex-col pl-4 pt-4">
         <label className="flex flex-col gap-3 mb-4">
           <span className="font-Quicksand">Type the project&apos;s name</span>

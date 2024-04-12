@@ -35,7 +35,7 @@ export function Home() {
         <p className="text-xs font-Quicksand text-pgray-700">{message}</p>
       </div>
       <section className="flex flex-col w-full md:flex-col-reverse">
-        <section className="w-full flex flex-col items-center mt-2 pb-8 md:items-start">
+        <section className="w-full flex flex-col mt-2 pb-8 md:items-start">
           <h3 className="pt-4 font-Quicksand self-start text-sm font-semibold ">Today&apos;s taks</h3>
           <AddTask />
           {loading && <LoadingTasks count={3}/>}
