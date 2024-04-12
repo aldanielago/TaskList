@@ -9,9 +9,7 @@ export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   const menuRef = useRef(null);
 
   let haveProject = false;
-  if(onAddProject) {
-    haveProject = projects.find( p => p.tasksId.includes(item.id)) ? true : false || false;
-  }
+  onAddProject && projects.find( p => p.tasksId.includes(item.id)) ? haveProject = true : false;
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
