@@ -177,7 +177,6 @@ function ProjectProvider({ children }) {
   }
 
   function addTaskToProject(projectId, taskId) {
-    removeTaskFromProject(taskId);
     setProjects(projects.map((p) => {
       if (p.id === projectId) {
         if (p.tasks === undefined) {

@@ -56,7 +56,7 @@ export function ProjectPage() {
   }
 
   return (
-    <section className="w-full overflow-y-auto flex flex-col items-center justify-center">
+    <section className="w-full h-full overflow-y-auto flex flex-col items-center justify-center">
       <div className={`${projectsPalette[project.paletteId].primaryColor} relative w-full h-24 md:h-[20vh]`}>
       <HiArrowCircleLeft className={`${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'text-white' : 'text-pgray-700'} text-4xl relative top-5 left-3 md:invisible`} onClick={goBackHome}/>
         <button className={`p-2 rounded-md border ${projectsPalette[project.paletteId].primaryColor == 'bg-pgreen-600' ? 'border-white text-white' : 'border-pgray-700'} tracking-wider font-Quicksand font-bold text-xs absolute bottom-4 right-4 transition-colors duration-500 ease-in-out`}

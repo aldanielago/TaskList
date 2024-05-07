@@ -26,7 +26,7 @@ export function TodoItem({ task, onDelete, onComplete, onAddProject, showDate = 
       <div className="flex flex-col w-full">
         { editName
           ? <Input item={task} value={name} onChange={setName} setEdit={setEditName} mainFunction={editTextTask} text={'small'} placeholder={'New name'}/>
-          : <span className={`text-sm font-Quicksand ${task.isCompleted ? 'line-through' : 'no-underline'} line-clamp-1 transition-all duration-300 ease-in-out`}
+          : <span className={`text-sm font-Quicksand ${task.isCompleted ? 'line-through' : 'no-underline'} line-clamp-1 dark:text-black transition-all duration-300 ease-in-out`}
               onClick={() => setEditName(true)}>
               { name == '' ? 'New task' : name}
             </span>

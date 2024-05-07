@@ -44,7 +44,7 @@ export function AddTask({ projectId }) {
   return (
     <>
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
-      <section className="max-w-lg px-3 py-2 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md border-slate-400 border border-opacity-5">
+      <section className="max-w-lg px-3 py-2 pl-5 mt-2 w-11/12 rounded-3xl flex justify-between items-center shadow-md border-slate-400 border border-opacity-5 dark:border-opacity-40">
         <Input value={inputName}  onChange={setInputName} mainFunction={handleAddTask} text={'small'} placeholder={"Task's name"}/>
         <div className="flex items-center gap-3">
           <div className="relative flex items-center">

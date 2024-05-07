@@ -63,7 +63,7 @@ export function AddProjectPage() {
   }
 
   return (
-    <section className="h-screen w-screen overflow-auto pl-6">
+    <section className="h-screen overflow-auto pl-6">
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
       <HiArrowCircleLeft className="text-pblue-500 text-4xl relative top-5 left-3 md:invisible" onClick={goBackHome}/>
       <h1 className="font-Quicksand font-bold text-xl pl-4 pt-8">Add a project</h1>
@@ -78,7 +78,7 @@ export function AddProjectPage() {
         </label>
         <label className="flex flex-col gap-3 pb-4 max-w-[90%]">
           <span className="font-Quicksand">Choose an icon: </span>
-          <div className="flex overflow-x-auto gap-3">
+          <div className="flex overflow-x-auto gap-3 w-[60%]">
             { projectIcons.map((icon, index) =>
               <label key={index}>
                 <input type="radio" name="icon" value={index} className="hidden" onChange={(e) => handleChange(e)}/>

@@ -29,14 +29,14 @@ export function Home() {
   const message = generateMessage(tasks);
 
   return (
-    <section className="w-full h-screen overflow-y-auto pl-6 dark:bg-pdark-900  ">
+    <section className="w-full h-screen overflow-y-auto pl-6 dark:bg-pdark-900">
       <div className="pt-4">
-        <h1 className="font-Quicksand font-bold text-lg">Hi there!</h1>
-        <p className="text-xs font-Quicksand text-pgray-700">{message}</p>
+        <h1 className="font-Quicksand font-bold text-lg dark:text-white">Hi there!</h1>
+        <p className="text-xs font-Quicksand text-pgray-700 dark:text-white">{message}</p>
       </div>
       <section className="flex flex-col w-full md:flex-col-reverse">
         <section className="w-full flex flex-col mt-2 pb-8 md:items-start">
-          <h3 className="pt-4 font-Quicksand self-start text-sm font-semibold ">Today&apos;s taks</h3>
+          <h3 className="pt-4 font-Quicksand self-start text-sm font-semibold dark:text-white">Today&apos;s taks</h3>
           <AddTask />
           {loading && <LoadingTasks count={3}/>}
           {!loading && sortedTasks.length === 0 && <InformativeBox item="tasks" time="for today" />}
@@ -51,7 +51,7 @@ export function Home() {
           ))}
         </section>
         <section className="w-full flex flex-col pb-1">
-          <h3 className="pt-2 font-Quicksand self-start text-sm font-semibold">Projects</h3>
+          <h3 className="pt-2 font-Quicksand self-start text-sm font-semibold dark:text-white">Projects</h3>
           {loading && <LoadingTasks />}
           {!loading && projects.length === 0 && <InformativeBox item="projects yet." />}
           <section className="flex flex-col w-full md:flex-row overflow-x-auto pb-2 md:gap-4 md:items-start md:justify-start">
