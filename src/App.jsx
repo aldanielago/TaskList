@@ -13,7 +13,6 @@ function App() {
 
   const handleDarkMode = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    console.log(theme);
   }
 
   useEffect(() => {
