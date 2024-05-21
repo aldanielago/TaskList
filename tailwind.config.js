@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", './index.html'],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './index.html'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -22,20 +22,19 @@ export default {
         'pgray-700': '#707084',
         // light theme
         'pgray-100': '#F4F7FF',
-        //dark theme
+        // dark theme
         'pdark-800': '#2D2D2D',
-        'pdark-900': '#1e1e1e',
+        'pdark-900': '#1e1e1e'
       },
       fontFamily: {
-        'Quicksand': 'Quicksand' || 'sans-serif',
+        Quicksand: 'Quicksand' || 'sans-serif'
       }
-    },
+    }
   },
   plugins: [
     // eslint-disable-next-line no-undef
     require('@tailwindcss/forms')({
-      strategy: 'class',
+      strategy: 'class'
     })
-  ],
+  ]
 }
-
