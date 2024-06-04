@@ -9,12 +9,11 @@ import { TaskContext } from '../../contexts/TaskContext'
 import { TodoItem } from '../elements/TodoItem'
 import { useContext } from 'react'
 
-export function Home () {
+export function Home() {
   const { projects, addTaskToProject, removeTaskFromProject } = useContext(ProjectContext)
   const { loading, tasks, sortedTasks, generateMessage, deleteTask, completeTask, notifyEventListeners } = useContext(TaskContext)
 
   const handleAddProject = (taskId, projectId) => {
-    removeTaskFromProject(taskId)
     addTaskToProject(projectId, taskId)
     notifyEventListeners()
   }

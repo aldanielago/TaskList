@@ -2,7 +2,7 @@ import { MdOutlineMoreHoriz } from 'react-icons/md'
 import { ProjectContext } from '../../contexts/ProjectsContext'
 import { useState, useRef, useEffect, useContext } from 'react'
 
-export function SmallOptionsMenu ({ item, onDelete, onAddProject }) {
+export function SmallOptionsMenu({ item, onDelete, onAddProject }) {
   const { projects, removeTaskFromProject } = useContext(ProjectContext)
   const [isOpen, setIsOpen] = useState(false)
   const [toAddProject, setToAddProject] = useState(false)
@@ -71,10 +71,10 @@ export function SmallOptionsMenu ({ item, onDelete, onAddProject }) {
             key={p.id}
             value={p.id}
             onClick={() => { handleAddProject(p) }}
-                             >{p.name}
-                             </button>)}
+          >{p.name}
+          </button>)}
         </div>
-                       </>}
+      </>}
     </div>
   )
 }

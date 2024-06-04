@@ -7,7 +7,7 @@ import { BiAbacus, BiAlarm, BiArchive, BiAtom, BiBaguette, BiBarChartSquare, BiB
 
 const ProjectContext = createContext()
 
-function ProjectProvider ({ children }) {
+function ProjectProvider({ children }) {
   const { item: projects, updateInfo: setProjects, loading, error } = useLocalStorage('PROJECTS_V1', [])
 
   const projectsPalette = [
@@ -97,11 +97,11 @@ function ProjectProvider ({ children }) {
     { id: 74, component: <SlHeart /> }
   ]
 
-  function generateUniqueId () {
+  function generateUniqueId() {
     return Date.now() // It uses the timestamp as id
   }
 
-  function createProject (name, paletteId, iconId, description) {
+  function createProject(name, paletteId, iconId, description) {
     const newProject = {
       id: generateUniqueId(),
       name,
@@ -115,11 +115,11 @@ function ProjectProvider ({ children }) {
   }
 
   // Delete a project by id
-  function deleteProject (projectId) {
+  function deleteProject(projectId) {
     setProjects(projects.filter(p => p.id != projectId))
   }
 
-  function changeProjectIcon (projectId, iconId) {
+  function changeProjectIcon(projectId, iconId) {
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
         return {
@@ -133,7 +133,7 @@ function ProjectProvider ({ children }) {
     setProjects(newProjects)
   }
 
-  function changeNameProject (projectId, newName) {
+  function changeNameProject(projectId, newName) {
     newName == '' ? newName = 'New Project' : null
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
@@ -148,7 +148,7 @@ function ProjectProvider ({ children }) {
     setProjects(newProjects)
   }
 
-  function changePaletteProject (projectId, idPalette) {
+  function changePaletteProject(projectId, idPalette) {
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
         return {
@@ -162,7 +162,7 @@ function ProjectProvider ({ children }) {
     setProjects(newProjects)
   }
 
-  function changeProjectDescription (projectId, newDescription) {
+  function changeProjectDescription(projectId, newDescription) {
     const newProjects = projects.map((p) => {
       if (p.id === projectId) {
         return {
@@ -176,38 +176,30 @@ function ProjectProvider ({ children }) {
     setProjects(newProjects)
   }
 
-  function addTaskToProject (projectId, taskId) {
-    setProjects(projects.map((p) => {
-      if (p.id === projectId) {
-        if (p.tasks === undefined) {
-          return {
-            ...p,
-            tasksId: [taskId]
-          }
-        } else {
+  function addTaskToProject(projectId, taskId) {
+    setProjects(
+      projects.map((p) => {
+        if (p.id === projectId) {
           return {
             ...p,
             tasksId: [...p.tasksId, taskId]
           }
+        } else {
+          return p
         }
-      } else {
-        return p
       }
-    }))
+      ))
   }
 
-  function removeTaskFromProject (taskId) {
-    setProjects(projects.map((p) => {
-      if (p.tasks != undefined && p.tasks.includes(taskId)) {
-        const newTasks = p.tasks.filter((taskIdInProject) => taskIdInProject != taskId)
+  function removeTaskFromProject(taskId) {
+    setProjects(
+      projects.map((p) => {
         return {
           ...p,
-          tasksId: newTasks
+          tasksId: p.tasksId.filter((id) => id !== taskId)
         }
-      } else {
-        return p
-      }
-    }))
+      })
+    )
   }
 
   return (
